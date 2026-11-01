@@ -90,6 +90,21 @@ def serve_logo_image():
             return FileResponse(p, media_type="image/jpeg")
     return {"error": "Logo not found"}
 
+@app.get("/splash.mp4")
+@app.get("/images/splash.mp4")
+@app.get("/static/images/splash.mp4")
+def serve_splash_video():
+    paths = [
+        os.path.join(frontend_dir, "images", "splash.mp4"),
+        os.path.join(static_dir, "images", "splash.mp4"),
+        os.path.join(frontend_dir, "splash.mp4"),
+        os.path.join(static_dir, "splash.mp4")
+    ]
+    for p in paths:
+        if os.path.exists(p):
+            return FileResponse(p, media_type="video/mp4")
+    return {"error": "Splash video not found"}
+
 @app.get("/")
 def serve_home():
     index_file = os.path.join(frontend_dir, "index.html")

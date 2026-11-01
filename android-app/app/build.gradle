@@ -36,6 +36,12 @@ android {
     buildFeatures {
         viewBinding false
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "NANOVA_INFOTECH.apk"
+        }
+    }
 }
 
 dependencies {
@@ -50,17 +56,22 @@ dependencies {
 tasks.configureEach { task ->
     if (task.name == 'assembleDebug') {
         task.doLast {
-            def apkFile = file("${layout.buildDirectory.get()}/outputs/apk/debug/app-debug.apk")
+            def apkFile = file("${layout.buildDirectory.get()}/outputs/apk/debug/NANOVA_INFOTECH.apk")
+            if (!apkFile.exists()) {
+                apkFile = file("${layout.buildDirectory.get()}/outputs/apk/debug/app-debug.apk")
+            }
             if (apkFile.exists()) {
                 copy {
                     from apkFile
                     into rootProject.rootDir
+                    rename { "NANOVA_INFOTECH.apk" }
                 }
                 def localAppBuildDir = file("${rootProject.rootDir}/app/build/outputs/apk/debug")
                 localAppBuildDir.mkdirs()
                 copy {
                     from apkFile
                     into localAppBuildDir
+                    rename { "NANOVA_INFOTECH.apk" }
                 }
             }
         }
