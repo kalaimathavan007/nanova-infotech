@@ -1,4 +1,5 @@
 {
+  "name": "nanova-infotech",
   "rewrites": [
     {
       "source": "/(.*)",

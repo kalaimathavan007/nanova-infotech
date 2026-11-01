@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
 
-    // Nanova Infotech Vercel Production URL & Local Fallback
-    private val PORTAL_URL = "https://nayagi-incubation-project.vercel.app/"
+    // Nanova Infotech Vercel Production URL
+    private val PORTAL_URL = "https://nanova-infotech.vercel.app/"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
