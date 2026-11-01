@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nanova Infotech - Team Workspace & Communication Portal</title>
+    <title>NANOVA INFOTECH - Official Team Portal</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- 100% SELF-CONTAINED ICONIC CSS LAYOUT -->
     <style>
         :root {
-            --bg-dark: #05070c;
-            --card-bg: rgba(13, 18, 30, 0.92);
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --secondary: #0ea5e9;
-            --accent-gold: #ffffff;
+            --bg-dark: #030712;
+            --card-bg: rgba(15, 23, 42, 0.88);
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --accent: #6366f1;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --border-glass: rgba(255, 255, 255, 0.12);
+            --border-glass: rgba(255, 255, 255, 0.1);
         }
 
         * {
@@ -30,7 +28,7 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
@@ -42,109 +40,95 @@
             position: relative;
         }
 
-        /* Ambient Glowing Background Orbs */
-        .ambient-orb {
+        /* Subtle Ambient Glow */
+        .ambient-glow {
             position: fixed;
             border-radius: 50%;
-            filter: blur(90px);
+            filter: blur(120px);
             pointer-events: none;
             z-index: 1;
-            opacity: 0.5;
+            opacity: 0.35;
         }
-        .orb-1 {
-            top: -10%;
-            left: -10%;
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.5), rgba(14, 165, 233, 0.15));
-            animation: orbFloat1 16s ease-in-out infinite alternate;
+        .glow-1 {
+            top: -15%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #38bdf8, transparent 70%);
         }
-        .orb-2 {
-            bottom: -10%;
-            right: -10%;
-            width: 480px;
-            height: 480px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(99, 102, 241, 0.15));
-            animation: orbFloat2 20s ease-in-out infinite alternate;
+        .glow-2 {
+            bottom: -15%;
+            right: -15%;
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #6366f1, transparent 70%);
         }
 
-        @keyframes orbFloat1 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(60px, 80px) scale(1.15); }
-        }
-        @keyframes orbFloat2 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-70px, -60px) scale(1.1); }
-        }
-
-        /* ICONIC GLASS CARD CONTAINER */
-        .iconic-card {
+        /* Professional Glass Card */
+        .pro-card {
             background: var(--card-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
             border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85),
-                        0 0 40px rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9),
+                        0 0 30px rgba(56, 189, 248, 0.12);
             width: 100%;
-            max-width: 460px;
+            max-width: 440px;
             padding: 2.25rem 2rem;
             margin: auto;
             position: relative;
             z-index: 10;
-            animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        @keyframes cardEntrance {
-            from { opacity: 0; transform: translateY(25px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Uploaded Nanova Logo Display */
-        .uploaded-logo-container {
+        /* Logo Display */
+        .logo-box {
             width: 100%;
-            max-width: 260px;
-            margin: 0 auto 0.75rem auto;
+            max-width: 220px;
+            margin: 0 auto 1.25rem auto;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .uploaded-logo-img {
+        .logo-img {
             width: 100%;
             height: auto;
-            max-height: 200px;
+            max-height: 170px;
             object-fit: contain;
-            filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.25));
-            animation: logoFloat 3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
         }
 
-        @keyframes logoFloat {
-            0% { transform: translateY(0) scale(0.98); }
-            100% { transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.4)); }
+        .brand-subtitle {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.5px;
         }
 
         /* Auth Tabs */
-        .tab-switcher {
+        .tab-bar {
             display: flex;
-            background: rgba(15, 23, 42, 0.9);
-            padding: 0.3rem;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            margin: 1.25rem 0 1.5rem 0;
+            background: rgba(30, 41, 59, 0.7);
+            padding: 0.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 1.5rem;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 0.65rem 0.5rem;
-            font-size: 0.8rem;
+            padding: 0.65rem;
+            font-size: 0.825rem;
             font-weight: 700;
-            border-radius: 10px;
+            border-radius: 9px;
             border: none;
-            color: #94a3b8;
+            color: var(--text-muted);
             background: transparent;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -152,62 +136,56 @@
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
             color: #ffffff;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
         }
 
-        /* Form Inputs */
-        .form-field {
+        /* Inputs */
+        .form-group {
             margin-bottom: 1.1rem;
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
         }
 
-        .field-label {
-            font-size: 0.725rem;
+        .form-label {
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
             color: #cbd5e1;
         }
 
-        .input-box {
+        .input-wrapper {
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .input-box i {
+        .input-wrapper i {
             position: absolute;
-            left: 1rem;
+            left: 0.9rem;
             color: #64748b;
             font-size: 0.85rem;
-            transition: color 0.2s ease;
         }
 
         .form-input {
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #ffffff;
-            border-radius: 12px;
-            padding: 0.75rem 1rem 0.75rem 2.6rem;
+            border-radius: 10px;
+            padding: 0.75rem 0.9rem 0.75rem 2.5rem;
             font-size: 0.875rem;
             width: 100%;
             outline: none;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
         }
 
         .form-input:focus {
-            border-color: #818cf8;
-            box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.28);
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
             background: rgba(15, 23, 42, 0.98);
-        }
-
-        .form-input:focus + i,
-        .input-box:focus-within i {
-            color: #818cf8;
         }
 
         select.form-input option {
@@ -215,147 +193,59 @@
             color: #ffffff;
         }
 
-        textarea.form-input {
-            resize: vertical;
-        }
-
-        /* Glowing Submit Buttons */
-        .btn-action-primary {
+        /* Action Buttons */
+        .btn-submit {
             width: 100%;
-            padding: 0.9rem;
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            padding: 0.85rem;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
             color: #ffffff;
             font-size: 0.875rem;
             font-weight: 700;
             border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.25rem;
-        }
-
-        .btn-action-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.55);
-        }
-
-        .btn-action-secondary {
-            width: 100%;
-            padding: 0.9rem;
-            background: linear-gradient(135deg, #0284c7, #0ea5e9);
-            color: #ffffff;
-            font-size: 0.875rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-top: 1.25rem;
-        }
-
-        .btn-action-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.55);
-        }
-
-        /* Splash Overlay */
-        #splash-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #05070c;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-
-        .splash-progress-bar {
-            width: 140px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-            margin-top: 1.5rem;
-        }
-
-        .splash-progress-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 0%;
-            background: linear-gradient(90deg, #38bdf8, #818cf8, #ffffff);
-            animation: fillProgress 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        @keyframes fillProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        /* Alert Box */
-        .notify-alert {
-            padding: 0.75rem 1rem;
             border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+        }
+
+        /* Alert Notification */
+        .alert-box {
+            padding: 0.75rem;
+            border-radius: 10px;
             font-size: 0.8rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        .notify-alert.error {
+        .alert-box.error {
             background: rgba(239, 68, 68, 0.15);
             color: #f87171;
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
-        .notify-alert.success {
+        .alert-box.success {
             background: rgba(16, 185, 129, 0.15);
             color: #34d399;
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
-        .hidden {
-            display: none !important;
-        }
-
-        .flex-2 {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .flex-2 > div {
-            flex: 1;
-        }
-
-        @media (max-width: 640px) {
-            .flex-2 {
-                flex-direction: column;
-                gap: 0;
-            }
-            .iconic-card {
-                padding: 1.75rem 1.25rem;
-            }
-        }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Ambient Glowing Orbs -->
-    <div class="ambient-orb orb-1"></div>
-    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
 
     <!-- Full Video Splash Screen Animation -->
     <div id="splash-overlay" onclick="document.getElementById('splash-overlay').style.display='none'" style="position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease; cursor: pointer;">
@@ -365,119 +255,102 @@
         </video>
     </div>
 
-    <!-- MAIN ICONIC CARD -->
-    <div class="iconic-card">
+    <!-- MAIN PROFESSIONAL CARD -->
+    <div class="pro-card">
 
-        <!-- Exact Uploaded Nanova Logo Image Display -->
-        <div class="uploaded-logo-container">
-            <img src="/logo.svg" alt="Nanova Infotech Logo" class="uploaded-logo-img">
+        <!-- Logo -->
+        <div class="logo-box">
+            <img src="/logo.svg" alt="Nanova Infotech Logo" class="logo-img">
         </div>
+        <p class="brand-subtitle">Nanova Infotech Internal Team Workspace</p>
 
-        <!-- Auth Switch Tabs -->
-        <div class="tab-switcher">
+        <!-- Auth Tabs -->
+        <div class="tab-bar">
             <button id="tab-login" type="button" onclick="switchAuthTab('login')" class="tab-btn active">
-                <i class="fa-solid fa-right-to-bracket"></i> Employee Sign In
+                <i class="fa-solid fa-lock"></i> Sign In
             </button>
             <button id="tab-register" type="button" onclick="switchAuthTab('register')" class="tab-btn">
-                <i class="fa-solid fa-user-plus"></i> Join Company Team
+                <i class="fa-solid fa-user-plus"></i> Join Team
             </button>
         </div>
 
         <!-- Alert Notification Box -->
-        <div id="auth-alert" class="notify-alert error hidden"></div>
+        <div id="auth-alert" class="alert-box error hidden"></div>
 
         <!-- 1. LOGIN FORM -->
         <form id="form-login" onsubmit="handleLogin(event)" autocomplete="off">
-            <div class="form-field">
-                <label for="login-email" class="field-label">Company Email</label>
-                <div class="input-box">
+            <div class="form-group">
+                <label for="login-email" class="form-label">Email Address</label>
+                <div class="input-wrapper">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="login-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
+                    <input type="email" id="login-email" required autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
                 </div>
             </div>
 
-            <div class="form-field">
-                <label for="login-password" class="field-label">Password</label>
-                <div class="input-box">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="login-password" required value="" autocomplete="new-password" class="form-input" placeholder="••••••••">
+            <div class="form-group">
+                <label for="login-password" class="form-label">Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-key"></i>
+                    <input type="password" id="login-password" required autocomplete="new-password" class="form-input" placeholder="••••••••">
                 </div>
             </div>
 
-            <button type="submit" id="btn-login-submit" class="btn-action-primary">
-                <span>Sign In to Nanova Workspace</span>
+            <button type="submit" id="btn-login-submit" class="btn-submit">
+                <span>Sign In to Workspace</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </form>
 
-        <!-- 2. REGISTER TEAM FORM -->
+        <!-- 2. STREAMLINED REGISTER FORM -->
         <form id="form-register" onsubmit="handleRegister(event)" class="hidden" autocomplete="off">
-
-            <div class="flex-2">
-                <div class="form-field">
-                    <label for="reg-name" class="field-label">Full Name *</label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" id="reg-name" required value="" autocomplete="off" class="form-input" placeholder="Employee Name">
-                    </div>
-                </div>
-
-                <div class="form-field">
-                    <label for="reg-email" class="field-label">Email Address *</label>
-                    <div class="input-box">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="reg-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
-                    </div>
+            <div class="form-group">
+                <label for="reg-name" class="form-label">Full Name *</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" id="reg-name" required autocomplete="off" class="form-input" placeholder="e.g. Rajesh Kumar">
                 </div>
             </div>
 
-            <div class="form-field">
-                <label for="reg-team" class="field-label">Department / Team Name *</label>
-                <div class="input-box">
-                    <i class="fa-solid fa-people-group"></i>
-                    <input type="text" id="reg-team" required value="" autocomplete="off" class="form-input" placeholder="e.g. Software Development">
+            <div class="form-group">
+                <label for="reg-email" class="form-label">Company Email *</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="reg-email" required autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
                 </div>
             </div>
 
-            <div class="flex-2">
-                <div class="form-field">
-                    <label for="reg-idea" class="field-label">Project / Role Title *</label>
-                    <input type="text" id="reg-idea" required value="" autocomplete="off" class="form-input" style="padding-left: 1rem;" placeholder="e.g. Frontend Engineer">
+            <div class="form-group">
+                <label for="reg-team" class="form-label">Department / Team Name *</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-building"></i>
+                    <input type="text" id="reg-team" required autocomplete="off" class="form-input" placeholder="e.g. Software Development">
                 </div>
+            </div>
 
-                <div class="form-field">
-                    <label for="reg-domain" class="field-label">Department Sector *</label>
-                    <select id="reg-domain" required onchange="toggleOtherDomain('reg-domain', 'reg-domain-other-container')" class="form-input" style="padding-left: 1rem;">
-                        <option value="Software Engineering">Software Engineering</option>
-                        <option value="AI & Data Science">AI & Data Science</option>
-                        <option value="Mobile App Development">Mobile App Development</option>
-                        <option value="UI/UX & Design">UI/UX & Design</option>
-                        <option value="DevOps & Cloud">DevOps & Cloud</option>
-                        <option value="Management & HR">Management & HR</option>
-                        <option value="Other">Other Custom Team</option>
+            <div class="form-group">
+                <label for="reg-role" class="form-label">Role / Designation *</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user-tag"></i>
+                    <select id="reg-role" required class="form-input">
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Mobile App Developer">Mobile App Developer</option>
+                        <option value="UI/UX Designer">UI/UX Designer</option>
+                        <option value="Team Lead">Team Lead</option>
+                        <option value="Project Manager">Project Manager</option>
+                        <option value="HR & Operations">HR & Operations</option>
                     </select>
-
-                    <div id="reg-domain-other-container" class="hidden" style="margin-top: 0.5rem;">
-                        <label for="reg-domain-other" class="sr-only">Custom Sector</label>
-                        <input type="text" id="reg-domain-other" value="" autocomplete="off" placeholder="Type custom sector..." class="form-input" style="padding-left: 1rem;">
-                    </div>
                 </div>
             </div>
 
-            <div class="form-field">
-                <label for="reg-desc" class="field-label">Member Bio / Work Summary</label>
-                <textarea id="reg-desc" rows="2" class="form-input" style="padding-left: 1rem;" placeholder="Brief summary of member responsibilities..."></textarea>
-            </div>
-
-            <div class="form-field">
-                <label for="reg-password" class="field-label">Password *</label>
-                <div class="input-box">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="reg-password" required value="" autocomplete="new-password" class="form-input" placeholder="Minimum 6 characters">
+            <div class="form-group">
+                <label for="reg-password" class="form-label">Password *</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-key"></i>
+                    <input type="password" id="reg-password" required autocomplete="new-password" class="form-input" placeholder="Minimum 6 characters">
                 </div>
             </div>
 
-            <button type="submit" id="btn-reg-submit" class="btn-action-secondary">
+            <button type="submit" id="btn-reg-submit" class="btn-submit">
                 <span>Join Nanova Workspace</span>
                 <i class="fa-solid fa-user-check"></i>
             </button>
@@ -485,7 +358,6 @@
 
     </div>
 
-    <!-- Javascript Controller -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const loginEmail = document.getElementById("login-email");
@@ -528,16 +400,6 @@
             }
         });
 
-        function toggleOtherDomain(selectId, containerId) {
-            const select = document.getElementById(selectId);
-            const container = document.getElementById(containerId);
-            if (select.value === "Other") {
-                container.classList.remove("hidden");
-            } else {
-                container.classList.add("hidden");
-            }
-        }
-
         function switchAuthTab(tab) {
             const loginBtn = document.getElementById("tab-login");
             const regBtn = document.getElementById("tab-register");
@@ -579,7 +441,7 @@
 
             const submitBtn = document.getElementById("btn-login-submit");
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Signing In...`;
 
             try {
                 const res = await fetch("/api/auth/login", {
@@ -600,20 +462,20 @@
                 localStorage.setItem("incubation_team_id", data.team_id || "");
                 localStorage.setItem("incubation_team_name", data.team_name || "");
 
-                showAlert("Login Successful! Opening Nanova Workspace...", false);
+                showAlert("Login Successful! Opening Workspace...", false);
                 setTimeout(() => {
                     if (data.role === "admin") {
                         window.location.href = "/admin.html";
                     } else {
                         window.location.href = "/dashboard.html";
                     }
-                }, 500);
+                }, 400);
 
             } catch (err) {
                 showAlert(err.message, true);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Sign In to Nanova Workspace</span> <i class="fa-solid fa-arrow-right"></i>`;
+                submitBtn.innerHTML = `<span>Sign In to Workspace</span> <i class="fa-solid fa-arrow-right"></i>`;
             }
         }
 
@@ -622,15 +484,7 @@
             const full_name = document.getElementById("reg-name").value.trim();
             const email = document.getElementById("reg-email").value.trim();
             const team_name = document.getElementById("reg-team").value.trim();
-            const idea_title = document.getElementById("reg-idea").value.trim();
-
-            let domain = document.getElementById("reg-domain").value;
-            if (domain === "Other") {
-                const customDomain = document.getElementById("reg-domain-other").value.trim();
-                domain = customDomain || "Custom Domain";
-            }
-
-            const description = document.getElementById("reg-desc").value.trim();
+            const role_title = document.getElementById("reg-role").value;
             const password = document.getElementById("reg-password").value;
 
             const submitBtn = document.getElementById("btn-reg-submit");
@@ -641,7 +495,15 @@
                 const res = await fetch("/api/auth/register", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ full_name, email, team_name, idea_title, domain, description, password })
+                    body: JSON.stringify({
+                        full_name,
+                        email,
+                        team_name,
+                        idea_title: role_title,
+                        domain: "Nanova Team",
+                        description: role_title,
+                        password
+                    })
                 });
 
                 const data = await res.json();
@@ -656,14 +518,14 @@
                 localStorage.setItem("incubation_team_id", data.team_id || "");
                 localStorage.setItem("incubation_team_name", data.team_name || "");
 
-                showAlert("Registered Successfully! Opening Nanova Workspace...", false);
+                showAlert("Registered Successfully! Opening Workspace...", false);
                 setTimeout(() => {
                     if (data.role === "admin") {
                         window.location.href = "/admin.html";
                     } else {
                         window.location.href = "/dashboard.html";
                     }
-                }, 500);
+                }, 400);
 
             } catch (err) {
                 showAlert(err.message, true);
