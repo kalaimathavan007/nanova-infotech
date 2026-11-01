@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Nayagi Incubation Council"
+rootProject.name = "Nanova Infotech"
 include ":app"

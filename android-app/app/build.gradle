@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.nayagi.incubation'
+    namespace 'com.nanova.infotech'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.nayagi.incubation"
+        applicationId "com.nanova.infotech"
         minSdk 24
         targetSdk 34
         versionCode 1

@@ -1,4 +1,4 @@
-package com.nayagi.incubation
+package com.nanova.infotech
 
 import android.annotation.SuppressLint
 import android.content.Intent
