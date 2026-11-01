@@ -15,8 +15,8 @@ except Exception as e:
     print(f"Database initialization notice: {e}")
 
 app = FastAPI(
-    title="Nayagi Incubation Center API",
-    description="Backend API & Management Portal for Nayagi Incubation Center (MongoDB Powered)",
+    title="Nanova Infotech Workspace API",
+    description="Internal Team & Messaging Portal for Nanova Infotech",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc"

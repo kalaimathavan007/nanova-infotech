@@ -2,139 +2,529 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nayagi Incubation Center - Portal Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nanova Infotech - Team Workspace & Communication Portal</title>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- 100% SELF-CONTAINED ICONIC CSS LAYOUT -->
+    <style>
+        :root {
+            --bg-dark: #05070c;
+            --card-bg: rgba(13, 18, 30, 0.92);
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --secondary: #0ea5e9;
+            --accent-gold: #ffffff;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glowing Background Orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        .orb-1 {
+            top: -10%;
+            left: -10%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.5), rgba(14, 165, 233, 0.15));
+            animation: orbFloat1 16s ease-in-out infinite alternate;
+        }
+        .orb-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(99, 102, 241, 0.15));
+            animation: orbFloat2 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 80px) scale(1.15); }
+        }
+        @keyframes orbFloat2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-70px, -60px) scale(1.1); }
+        }
+
+        /* ICONIC GLASS CARD CONTAINER */
+        .iconic-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85),
+                        0 0 40px rgba(99, 102, 241, 0.2);
+            width: 100%;
+            max-width: 460px;
+            padding: 2.25rem 2rem;
+            margin: auto;
+            position: relative;
+            z-index: 10;
+            animation: cardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(25px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Uploaded Nanova Logo Display */
+        .uploaded-logo-container {
+            width: 100%;
+            max-width: 260px;
+            margin: 0 auto 0.75rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .uploaded-logo-img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.25));
+            animation: logoFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoFloat {
+            0% { transform: translateY(0) scale(0.98); }
+            100% { transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.4)); }
+        }
+
+        /* Auth Tabs */
+        .tab-switcher {
+            display: flex;
+            background: rgba(15, 23, 42, 0.9);
+            padding: 0.3rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin: 1.25rem 0 1.5rem 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.65rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 10px;
+            border: none;
+            color: #94a3b8;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Form Inputs */
+        .form-field {
+            margin-bottom: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .field-label {
+            font-size: 0.725rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #cbd5e1;
+        }
+
+        .input-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-box i {
+            position: absolute;
+            left: 1rem;
+            color: #64748b;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .form-input {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 0.75rem 1rem 0.75rem 2.6rem;
+            font-size: 0.875rem;
+            width: 100%;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .form-input:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.28);
+            background: rgba(15, 23, 42, 0.98);
+        }
+
+        .form-input:focus + i,
+        .input-box:focus-within i {
+            color: #818cf8;
+        }
+
+        select.form-input option {
+            background-color: #0f172a;
+            color: #ffffff;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+        }
+
+        /* Glowing Submit Buttons */
+        .btn-action-primary {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .btn-action-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.55);
+        }
+
+        .btn-action-secondary {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .btn-action-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.55);
+        }
+
+        /* Splash Overlay */
+        #splash-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #05070c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .splash-progress-bar {
+            width: 140px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 1.5rem;
+        }
+
+        .splash-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #ffffff);
+            animation: fillProgress 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Alert Box */
+        .notify-alert {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .notify-alert.error {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .notify-alert.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .flex-2 {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .flex-2 > div {
+            flex: 1;
+        }
+
+        @media (max-width: 640px) {
+            .flex-2 {
+                flex-direction: column;
+                gap: 0;
+            }
+            .iconic-card {
+                padding: 1.75rem 1.25rem;
+            }
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center p-4 relative overflow-x-hidden">
+<body>
 
-    <!-- Background Decorative Glows -->
-    <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- Ambient Glowing Orbs -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
 
-    <div class="w-full max-w-md glass-panel p-8 animate-fade-in relative z-10">
-
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600/20 text-indigo-400 mb-4 border border-indigo-500/30">
-                <i class="fa-solid fa-rocket text-2xl"></i>
+    <!-- Splash Screen Animation -->
+    <div id="splash-overlay">
+        <div style="text-align: center; padding: 1rem;">
+            <div class="uploaded-logo-container">
+                <img src="/logo.svg" alt="Nanova Infotech Logo" class="uploaded-logo-img">
             </div>
-            <h1 class="text-2xl font-bold tracking-tight text-white">Nayagi Incubation Center</h1>
-            <p class="text-sm text-slate-400 mt-1">Management Portal & Team Hub</p>
+            <div class="splash-progress-bar">
+                <div class="splash-progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN ICONIC CARD -->
+    <div class="iconic-card">
+
+        <!-- Exact Uploaded Nanova Logo Image Display -->
+        <div class="uploaded-logo-container">
+            <img src="/logo.svg" alt="Nanova Infotech Logo" class="uploaded-logo-img">
         </div>
 
-        <!-- Auth Tabs -->
-        <div class="flex bg-slate-900/60 p-1 rounded-xl mb-6 border border-slate-800">
-            <button id="tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2 text-sm font-semibold rounded-lg text-white bg-indigo-600 transition-all duration-200">
-                <i class="fa-solid fa-right-to-bracket mr-2"></i>Sign In
+        <!-- Auth Switch Tabs -->
+        <div class="tab-switcher">
+            <button id="tab-login" type="button" onclick="switchAuthTab('login')" class="tab-btn active">
+                <i class="fa-solid fa-right-to-bracket"></i> Employee Sign In
             </button>
-            <button id="tab-register" onclick="switchAuthTab('register')" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-200">
-                <i class="fa-solid fa-user-plus mr-2"></i>Register
+            <button id="tab-register" type="button" onclick="switchAuthTab('register')" class="tab-btn">
+                <i class="fa-solid fa-user-plus"></i> Join Company Team
             </button>
         </div>
 
-        <!-- Alert Notification -->
-        <div id="auth-alert" class="hidden mb-4 p-3 rounded-lg text-sm flex items-center gap-2"></div>
+        <!-- Alert Notification Box -->
+        <div id="auth-alert" class="notify-alert error hidden"></div>
 
-        <!-- LOGIN FORM -->
-        <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email Address</label>
-                <div class="relative">
-                    <i class="fa-solid fa-envelope absolute left-3 top-3 text-slate-500"></i>
-                    <input type="email" id="login-email" required class="w-full glass-input pl-10" placeholder="admin@incubation.com or user@alphainno.com">
+        <!-- 1. LOGIN FORM -->
+        <form id="form-login" onsubmit="handleLogin(event)" autocomplete="off">
+            <div class="form-field">
+                <label for="login-email" class="field-label">Company Email</label>
+                <div class="input-box">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" id="login-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
                 </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Password</label>
-                <div class="relative">
-                    <i class="fa-solid fa-lock absolute left-3 top-3 text-slate-500"></i>
-                    <input type="password" id="login-password" required class="w-full glass-input pl-10" placeholder="••••••••">
+            <div class="form-field">
+                <label for="login-password" class="field-label">Password</label>
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="login-password" required value="" autocomplete="new-password" class="form-input" placeholder="••••••••">
                 </div>
             </div>
 
-            <button type="submit" id="btn-login-submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg shadow-indigo-600/30 flex justify-center items-center gap-2">
-                <span>Sign In to Dashboard</span>
+            <button type="submit" id="btn-login-submit" class="btn-action-primary">
+                <span>Sign In to Nanova Workspace</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </form>
 
-        <!-- REGISTER FORM -->
-        <form id="form-register" onsubmit="handleRegister(event)" class="space-y-4 hidden">
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Full Name</label>
-                <div class="relative">
-                    <i class="fa-solid fa-user absolute left-3 top-3 text-slate-500"></i>
-                    <input type="text" id="reg-name" required class="w-full glass-input pl-10" placeholder="John Doe">
+        <!-- 2. REGISTER TEAM FORM -->
+        <form id="form-register" onsubmit="handleRegister(event)" class="hidden" autocomplete="off">
+
+            <div class="flex-2">
+                <div class="form-field">
+                    <label for="reg-name" class="field-label">Full Name *</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="reg-name" required value="" autocomplete="off" class="form-input" placeholder="Employee Name">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="reg-email" class="field-label">Email Address *</label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="reg-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
+                    </div>
                 </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email Address</label>
-                <div class="relative">
-                    <i class="fa-solid fa-envelope absolute left-3 top-3 text-slate-500"></i>
-                    <input type="email" id="reg-email" required class="w-full glass-input pl-10" placeholder="user@myteam.com">
+            <div class="form-field">
+                <label for="reg-team" class="field-label">Department / Team Name *</label>
+                <div class="input-box">
+                    <i class="fa-solid fa-people-group"></i>
+                    <input type="text" id="reg-team" required value="" autocomplete="off" class="form-input" placeholder="e.g. Software Development">
                 </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Team Name (Optional)</label>
-                <div class="relative">
-                    <i class="fa-solid fa-people-group absolute left-3 top-3 text-slate-500"></i>
-                    <input type="text" id="reg-team" class="w-full glass-input pl-10" placeholder="e.g. Alpha Innovations">
+            <div class="flex-2">
+                <div class="form-field">
+                    <label for="reg-idea" class="field-label">Project / Role Title *</label>
+                    <input type="text" id="reg-idea" required value="" autocomplete="off" class="form-input" style="padding-left: 1rem;" placeholder="e.g. Frontend Engineer">
                 </div>
-                <p class="text-[11px] text-slate-400 mt-1">Join an existing team or create a new team.</p>
+
+                <div class="form-field">
+                    <label for="reg-domain" class="field-label">Department Sector *</label>
+                    <select id="reg-domain" required onchange="toggleOtherDomain('reg-domain', 'reg-domain-other-container')" class="form-input" style="padding-left: 1rem;">
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="AI & Data Science">AI & Data Science</option>
+                        <option value="Mobile App Development">Mobile App Development</option>
+                        <option value="UI/UX & Design">UI/UX & Design</option>
+                        <option value="DevOps & Cloud">DevOps & Cloud</option>
+                        <option value="Management & HR">Management & HR</option>
+                        <option value="Other">Other Custom Team</option>
+                    </select>
+
+                    <div id="reg-domain-other-container" class="hidden" style="margin-top: 0.5rem;">
+                        <label for="reg-domain-other" class="sr-only">Custom Sector</label>
+                        <input type="text" id="reg-domain-other" value="" autocomplete="off" placeholder="Type custom sector..." class="form-input" style="padding-left: 1rem;">
+                    </div>
+                </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Password</label>
-                <div class="relative">
-                    <i class="fa-solid fa-lock absolute left-3 top-3 text-slate-500"></i>
-                    <input type="password" id="reg-password" required class="w-full glass-input pl-10" placeholder="Minimum 6 characters">
+            <div class="form-field">
+                <label for="reg-desc" class="field-label">Member Bio / Work Summary</label>
+                <textarea id="reg-desc" rows="2" class="form-input" style="padding-left: 1rem;" placeholder="Brief summary of member responsibilities..."></textarea>
+            </div>
+
+            <div class="form-field">
+                <label for="reg-password" class="field-label">Password *</label>
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="reg-password" required value="" autocomplete="new-password" class="form-input" placeholder="Minimum 6 characters">
                 </div>
             </div>
 
-            <button type="submit" id="btn-reg-submit" class="w-full py-3 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg shadow-sky-600/30 flex justify-center items-center gap-2">
-                <span>Create Account</span>
+            <button type="submit" id="btn-reg-submit" class="btn-action-secondary">
+                <span>Join Nanova Workspace</span>
                 <i class="fa-solid fa-user-check"></i>
             </button>
         </form>
 
-        <!-- DEMO CREDENTIALS HINT -->
-        <div class="mt-8 pt-6 border-t border-slate-800">
-            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 text-center">Demo Quick Login Credentials</p>
-            <div class="grid grid-cols-2 gap-2 text-xs">
-                <button type="button" onclick="fillCredentials('admin@incubation.com', 'AdminPass123!')" class="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/60 hover:bg-slate-700 text-left transition-all">
-                    <div class="font-bold text-indigo-400 mb-0.5"><i class="fa-solid fa-shield-halved mr-1"></i> Admin</div>
-                    <div class="text-slate-400 text-[11px] truncate">admin@incubation.com</div>
-                    <div class="text-slate-500 text-[10px]">Pass: AdminPass123!</div>
-                </button>
-                <button type="button" onclick="fillCredentials('user@alphainno.com', 'UserPass123!')" class="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/60 hover:bg-slate-700 text-left transition-all">
-                    <div class="font-bold text-sky-400 mb-0.5"><i class="fa-solid fa-user-group mr-1"></i> User Team</div>
-                    <div class="text-slate-400 text-[11px] truncate">user@alphainno.com</div>
-                    <div class="text-slate-500 text-[10px]">Pass: UserPass123!</div>
-                </button>
-            </div>
-        </div>
-
     </div>
 
+    <!-- Javascript Controller -->
     <script>
-        // Check existing login token
         document.addEventListener("DOMContentLoaded", () => {
+            const loginEmail = document.getElementById("login-email");
+            const loginPass = document.getElementById("login-password");
+            if (loginEmail) loginEmail.value = "";
+            if (loginPass) loginPass.value = "";
+
+            setTimeout(() => {
+                const splash = document.getElementById("splash-overlay");
+                if (splash) {
+                    splash.style.opacity = "0";
+                    setTimeout(() => { splash.style.display = "none"; }, 500);
+                }
+            }, 900);
+
             const token = localStorage.getItem("incubation_token");
             const role = localStorage.getItem("incubation_role");
-            if (token) {
-                if (role === "admin") {
-                    window.location.href = "/admin.html";
-                } else {
-                    window.location.href = "/dashboard.html";
-                }
+
+            if (token && role === "user") {
+                window.location.href = "/dashboard.html";
+            } else if (role === "admin") {
+                localStorage.removeItem("incubation_token");
+                localStorage.removeItem("incubation_role");
             }
         });
+
+        function toggleOtherDomain(selectId, containerId) {
+            const select = document.getElementById(selectId);
+            const container = document.getElementById(containerId);
+            if (select.value === "Other") {
+                container.classList.remove("hidden");
+            } else {
+                container.classList.add("hidden");
+            }
+        }
 
         function switchAuthTab(tab) {
             const loginBtn = document.getElementById("tab-login");
@@ -145,13 +535,13 @@
             alertBox.classList.add("hidden");
 
             if (tab === "login") {
-                loginBtn.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-white bg-indigo-600 transition-all duration-200";
-                regBtn.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-200";
+                loginBtn.classList.add("active");
+                regBtn.classList.remove("active");
                 loginForm.classList.remove("hidden");
                 regForm.classList.add("hidden");
             } else {
-                regBtn.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-white bg-indigo-600 transition-all duration-200";
-                loginBtn.className = "flex-1 py-2 text-sm font-semibold rounded-lg text-slate-400 hover:text-white transition-all duration-200";
+                regBtn.classList.add("active");
+                loginBtn.classList.remove("active");
                 regForm.classList.remove("hidden");
                 loginForm.classList.add("hidden");
             }
@@ -159,21 +549,15 @@
 
         function showAlert(msg, isError = true) {
             const alertBox = document.getElementById("auth-alert");
-            alertBox.classList.remove("hidden", "bg-red-500/20", "text-red-300", "border-red-500/30", "bg-emerald-500/20", "text-emerald-300", "border-emerald-500/30");
+            alertBox.classList.remove("hidden", "error", "success");
 
             if (isError) {
-                alertBox.classList.add("bg-red-500/20", "text-red-300", "border", "border-red-500/30");
+                alertBox.classList.add("error");
                 alertBox.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> <span>${msg}</span>`;
             } else {
-                alertBox.classList.add("bg-emerald-500/20", "text-emerald-300", "border", "border-emerald-500/30");
+                alertBox.classList.add("success");
                 alertBox.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${msg}</span>`;
             }
-        }
-
-        function fillCredentials(email, pass) {
-            switchAuthTab("login");
-            document.getElementById("login-email").value = email;
-            document.getElementById("login-password").value = pass;
         }
 
         async function handleLogin(e) {
@@ -204,20 +588,20 @@
                 localStorage.setItem("incubation_team_id", data.team_id || "");
                 localStorage.setItem("incubation_team_name", data.team_name || "");
 
-                showAlert("Login Successful! Redirecting...", false);
+                showAlert("Login Successful! Opening Nanova Workspace...", false);
                 setTimeout(() => {
                     if (data.role === "admin") {
                         window.location.href = "/admin.html";
                     } else {
                         window.location.href = "/dashboard.html";
                     }
-                }, 600);
+                }, 500);
 
             } catch (err) {
                 showAlert(err.message, true);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Sign In to Dashboard</span> <i class="fa-solid fa-arrow-right"></i>`;
+                submitBtn.innerHTML = `<span>Sign In to Nanova Workspace</span> <i class="fa-solid fa-arrow-right"></i>`;
             }
         }
 
@@ -226,17 +610,26 @@
             const full_name = document.getElementById("reg-name").value.trim();
             const email = document.getElementById("reg-email").value.trim();
             const team_name = document.getElementById("reg-team").value.trim();
+            const idea_title = document.getElementById("reg-idea").value.trim();
+
+            let domain = document.getElementById("reg-domain").value;
+            if (domain === "Other") {
+                const customDomain = document.getElementById("reg-domain-other").value.trim();
+                domain = customDomain || "Custom Domain";
+            }
+
+            const description = document.getElementById("reg-desc").value.trim();
             const password = document.getElementById("reg-password").value;
 
             const submitBtn = document.getElementById("btn-reg-submit");
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Joining Team...`;
 
             try {
                 const res = await fetch("/api/auth/register", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ full_name, email, team_name, password })
+                    body: JSON.stringify({ full_name, email, team_name, idea_title, domain, description, password })
                 });
 
                 const data = await res.json();
@@ -251,20 +644,20 @@
                 localStorage.setItem("incubation_team_id", data.team_id || "");
                 localStorage.setItem("incubation_team_name", data.team_name || "");
 
-                showAlert("Account Created Successfully! Redirecting...", false);
+                showAlert("Registered Successfully! Opening Nanova Workspace...", false);
                 setTimeout(() => {
                     if (data.role === "admin") {
                         window.location.href = "/admin.html";
                     } else {
                         window.location.href = "/dashboard.html";
                     }
-                }, 600);
+                }, 500);
 
             } catch (err) {
                 showAlert(err.message, true);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Create Account</span> <i class="fa-solid fa-user-check"></i>`;
+                submitBtn.innerHTML = `<span>Join Nanova Workspace</span> <i class="fa-solid fa-user-check"></i>`;
             }
         }
     </script>

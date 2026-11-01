@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nayagi Incubation Council - Portal Access</title>
+    <title>Nanova Infotech - Team Workspace & Communication Portal</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -11,12 +11,12 @@
     <!-- 100% SELF-CONTAINED ICONIC CSS LAYOUT -->
     <style>
         :root {
-            --bg-dark: #070a13;
-            --card-bg: rgba(13, 18, 30, 0.88);
+            --bg-dark: #05070c;
+            --card-bg: rgba(13, 18, 30, 0.92);
             --primary: #6366f1;
             --primary-hover: #4f46e5;
             --secondary: #0ea5e9;
-            --accent-gold: #f59e0b;
+            --accent-gold: #ffffff;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border-glass: rgba(255, 255, 255, 0.12);
@@ -64,7 +64,7 @@
             right: -10%;
             width: 480px;
             height: 480px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.4), rgba(236, 72, 153, 0.2));
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(99, 102, 241, 0.15));
             animation: orbFloat2 20s ease-in-out infinite alternate;
         }
 
@@ -84,8 +84,8 @@
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-glass);
             border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7),
-                        0 0 40px rgba(99, 102, 241, 0.18);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85),
+                        0 0 40px rgba(99, 102, 241, 0.2);
             width: 100%;
             max-width: 460px;
             padding: 2.25rem 2rem;
@@ -100,10 +100,10 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Exact Uploaded Peacock Logo Display */
+        /* Uploaded Nanova Logo Display */
         .uploaded-logo-container {
             width: 100%;
-            max-width: 280px;
+            max-width: 260px;
             margin: 0 auto 0.75rem auto;
             display: flex;
             align-items: center;
@@ -113,15 +113,15 @@
         .uploaded-logo-img {
             width: 100%;
             height: auto;
-            max-height: 220px;
+            max-height: 200px;
             object-fit: contain;
-            filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.35));
+            filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.25));
             animation: logoFloat 3s ease-in-out infinite alternate;
         }
 
         @keyframes logoFloat {
             0% { transform: translateY(0) scale(0.98); }
-            100% { transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 0 24px rgba(245, 158, 11, 0.6)); }
+            100% { transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.4)); }
         }
 
         /* Auth Tabs */
@@ -273,7 +273,7 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: #070a13;
+            background: #05070c;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -297,7 +297,7 @@
             left: 0;
             bottom: 0;
             width: 0%;
-            background: linear-gradient(90deg, #38bdf8, #818cf8, #f59e0b);
+            background: linear-gradient(90deg, #38bdf8, #818cf8, #ffffff);
             animation: fillProgress 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
@@ -361,7 +361,7 @@
     <div id="splash-overlay">
         <div style="text-align: center; padding: 1rem;">
             <div class="uploaded-logo-container">
-                <img src="/logo.svg" alt="Nayagi Logo" class="uploaded-logo-img">
+                <img src="/logo.svg" alt="Nanova Infotech Logo" class="uploaded-logo-img">
             </div>
             <div class="splash-progress-bar">
                 <div class="splash-progress-fill"></div>
@@ -372,31 +372,31 @@
     <!-- MAIN ICONIC CARD -->
     <div class="iconic-card">
 
-        <!-- Exact Uploaded Peacock Logo Image Display -->
+        <!-- Exact Uploaded Nanova Logo Image Display -->
         <div class="uploaded-logo-container">
-            <img src="/logo.svg" alt="Nayagi Logo" class="uploaded-logo-img">
+            <img src="/logo.svg" alt="Nanova Infotech Logo" class="uploaded-logo-img">
         </div>
 
         <!-- Auth Switch Tabs -->
         <div class="tab-switcher">
             <button id="tab-login" type="button" onclick="switchAuthTab('login')" class="tab-btn active">
-                <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                <i class="fa-solid fa-right-to-bracket"></i> Employee Sign In
             </button>
             <button id="tab-register" type="button" onclick="switchAuthTab('register')" class="tab-btn">
-                <i class="fa-solid fa-user-plus"></i> Register Startup Team
+                <i class="fa-solid fa-user-plus"></i> Join Company Team
             </button>
         </div>
 
         <!-- Alert Notification Box -->
         <div id="auth-alert" class="notify-alert error hidden"></div>
 
-        <!-- 1. LOGIN FORM (Starts 100% EMPTY by default) -->
+        <!-- 1. LOGIN FORM -->
         <form id="form-login" onsubmit="handleLogin(event)" autocomplete="off">
             <div class="form-field">
-                <label for="login-email" class="field-label">Email Address</label>
+                <label for="login-email" class="field-label">Company Email</label>
                 <div class="input-box">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="login-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="Enter registered email">
+                    <input type="email" id="login-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
                 </div>
             </div>
 
@@ -409,7 +409,7 @@
             </div>
 
             <button type="submit" id="btn-login-submit" class="btn-action-primary">
-                <span>Sign In to Dashboard</span>
+                <span>Sign In to Nanova Workspace</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
         </form>
@@ -419,10 +419,10 @@
 
             <div class="flex-2">
                 <div class="form-field">
-                    <label for="reg-name" class="field-label">Founder Full Name *</label>
+                    <label for="reg-name" class="field-label">Full Name *</label>
                     <div class="input-box">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" id="reg-name" required value="" autocomplete="off" class="form-input" placeholder="Full Name">
+                        <input type="text" id="reg-name" required value="" autocomplete="off" class="form-input" placeholder="Employee Name">
                     </div>
                 </div>
 
@@ -430,49 +430,47 @@
                     <label for="reg-email" class="field-label">Email Address *</label>
                     <div class="input-box">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="reg-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="founder@startup.com">
+                        <input type="email" id="reg-email" required value="" autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
                     </div>
                 </div>
             </div>
 
             <div class="form-field">
-                <label for="reg-team" class="field-label">Team / Startup Name *</label>
+                <label for="reg-team" class="field-label">Department / Team Name *</label>
                 <div class="input-box">
                     <i class="fa-solid fa-people-group"></i>
-                    <input type="text" id="reg-team" required value="" autocomplete="off" class="form-input" placeholder="e.g. NextGen Robotics">
+                    <input type="text" id="reg-team" required value="" autocomplete="off" class="form-input" placeholder="e.g. Software Development">
                 </div>
             </div>
 
             <div class="flex-2">
                 <div class="form-field">
-                    <label for="reg-idea" class="field-label">Startup Idea Title *</label>
-                    <input type="text" id="reg-idea" required value="" autocomplete="off" class="form-input" style="padding-left: 1rem;" placeholder="e.g. Smart Drone">
+                    <label for="reg-idea" class="field-label">Project / Role Title *</label>
+                    <input type="text" id="reg-idea" required value="" autocomplete="off" class="form-input" style="padding-left: 1rem;" placeholder="e.g. Frontend Engineer">
                 </div>
 
                 <div class="form-field">
-                    <label for="reg-domain" class="field-label">Domain / Sector *</label>
+                    <label for="reg-domain" class="field-label">Department Sector *</label>
                     <select id="reg-domain" required onchange="toggleOtherDomain('reg-domain', 'reg-domain-other-container')" class="form-input" style="padding-left: 1rem;">
-                        <option value="General Software">General Software</option>
-                        <option value="AgriTech">AgriTech</option>
-                        <option value="AI & Robotics">AI & Robotics</option>
-                        <option value="IoT">IoT & Hardware</option>
-                        <option value="HealthTech">HealthTech</option>
-                        <option value="EdTech">EdTech</option>
-                        <option value="FinTech">FinTech</option>
-                        <option value="CleanTech & Energy">CleanTech & Energy</option>
-                        <option value="Other">Other (Custom Domain)</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="AI & Data Science">AI & Data Science</option>
+                        <option value="Mobile App Development">Mobile App Development</option>
+                        <option value="UI/UX & Design">UI/UX & Design</option>
+                        <option value="DevOps & Cloud">DevOps & Cloud</option>
+                        <option value="Management & HR">Management & HR</option>
+                        <option value="Other">Other Custom Team</option>
                     </select>
 
                     <div id="reg-domain-other-container" class="hidden" style="margin-top: 0.5rem;">
-                        <label for="reg-domain-other" class="sr-only">Custom Domain</label>
-                        <input type="text" id="reg-domain-other" value="" autocomplete="off" placeholder="Type custom domain..." class="form-input" style="padding-left: 1rem;">
+                        <label for="reg-domain-other" class="sr-only">Custom Sector</label>
+                        <input type="text" id="reg-domain-other" value="" autocomplete="off" placeholder="Type custom sector..." class="form-input" style="padding-left: 1rem;">
                     </div>
                 </div>
             </div>
 
             <div class="form-field">
-                <label for="reg-desc" class="field-label">Brief Description</label>
-                <textarea id="reg-desc" rows="2" class="form-input" style="padding-left: 1rem;" placeholder="Brief summary of startup idea..."></textarea>
+                <label for="reg-desc" class="field-label">Member Bio / Work Summary</label>
+                <textarea id="reg-desc" rows="2" class="form-input" style="padding-left: 1rem;" placeholder="Brief summary of member responsibilities..."></textarea>
             </div>
 
             <div class="form-field">
@@ -484,7 +482,7 @@
             </div>
 
             <button type="submit" id="btn-reg-submit" class="btn-action-secondary">
-                <span>Register Team & Access Workspace</span>
+                <span>Join Nanova Workspace</span>
                 <i class="fa-solid fa-user-check"></i>
             </button>
         </form>
@@ -494,13 +492,11 @@
     <!-- Javascript Controller -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Guarantee inputs start 100% EMPTY without pre-filled values
             const loginEmail = document.getElementById("login-email");
             const loginPass = document.getElementById("login-password");
             if (loginEmail) loginEmail.value = "";
             if (loginPass) loginPass.value = "";
 
-            // Dismiss Splash Screen safely
             setTimeout(() => {
                 const splash = document.getElementById("splash-overlay");
                 if (splash) {
@@ -512,7 +508,6 @@
             const token = localStorage.getItem("incubation_token");
             const role = localStorage.getItem("incubation_role");
 
-            // Regular user auto-login
             if (token && role === "user") {
                 window.location.href = "/dashboard.html";
             } else if (role === "admin") {
@@ -593,7 +588,7 @@
                 localStorage.setItem("incubation_team_id", data.team_id || "");
                 localStorage.setItem("incubation_team_name", data.team_name || "");
 
-                showAlert("Login Successful! Redirecting...", false);
+                showAlert("Login Successful! Opening Nanova Workspace...", false);
                 setTimeout(() => {
                     if (data.role === "admin") {
                         window.location.href = "/admin.html";
@@ -606,7 +601,7 @@
                 showAlert(err.message, true);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Sign In to Dashboard</span> <i class="fa-solid fa-arrow-right"></i>`;
+                submitBtn.innerHTML = `<span>Sign In to Nanova Workspace</span> <i class="fa-solid fa-arrow-right"></i>`;
             }
         }
 
@@ -628,7 +623,7 @@
 
             const submitBtn = document.getElementById("btn-reg-submit");
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Registering Team...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Joining Team...`;
 
             try {
                 const res = await fetch("/api/auth/register", {
@@ -649,7 +644,7 @@
                 localStorage.setItem("incubation_team_id", data.team_id || "");
                 localStorage.setItem("incubation_team_name", data.team_name || "");
 
-                showAlert("Team Registered Successfully! Redirecting to Workspace...", false);
+                showAlert("Registered Successfully! Opening Nanova Workspace...", false);
                 setTimeout(() => {
                     if (data.role === "admin") {
                         window.location.href = "/admin.html";
@@ -662,7 +657,7 @@
                 showAlert(err.message, true);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Register Team & Access Workspace</span> <i class="fa-solid fa-user-check"></i>`;
+                submitBtn.innerHTML = `<span>Join Nanova Workspace</span> <i class="fa-solid fa-user-check"></i>`;
             }
         }
     </script>

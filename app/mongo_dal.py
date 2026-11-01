@@ -52,9 +52,9 @@ def init_mongo_db():
     setting = db.admin_settings.find_one()
     if not setting:
         db.admin_settings.insert_one({
-            "incubation_name": "Nayagi Incubation Center",
-            "allowed_admin_emails": "rajalingamrajesh70@gmail.com, admin@incubation.com, kalai@nayagi.com, director@incubation.com",
-            "announcement": "Welcome to the Nayagi Incubation Portal! Teams please submit your daily attendance on time.",
+            "incubation_name": "Nanova Infotech",
+            "allowed_admin_emails": "admin@nanovainfotech.com, rajalingamrajesh70@gmail.com, admin@incubation.com, kalai@nayagi.com, director@incubation.com",
+            "announcement": "Welcome to Nanova Infotech Workspace! Teams please submit your daily attendance and stay connected in Chat.",
             "updated_at": datetime.utcnow()
         })
 

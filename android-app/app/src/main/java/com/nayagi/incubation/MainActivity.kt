@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
 
-    // Portal URL (Configured for Android Emulator http://10.0.2.2:8000 or production domain)
-    private val PORTAL_URL = "http://10.0.2.2:8000/"
+    // Nanova Infotech Vercel Production URL & Local Fallback
+    private val PORTAL_URL = "https://nayagi-incubation-project.vercel.app/"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         settings.useWideViewPort = true
         settings.builtInZoomControls = false
         settings.setSupportZoom(false)
-        settings.userAgentString = settings.userAgentString + " NayagiIncubationAndroidApp"
+        settings.userAgentString = settings.userAgentString + " NanovaInfotechAndroidApp"
 
         webView.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
