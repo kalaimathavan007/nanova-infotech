@@ -60,34 +60,34 @@ elif os.path.exists(static_dir):
 
 # Dedicated Guaranteed Logo Endpoints
 @app.get("/logo.svg")
+@app.get("/logo.jpg")
+@app.get("/logo.png")
 @app.get("/static/images/logo.svg")
+@app.get("/static/images/logo.png")
+@app.get("/static/images/logo.jpg")
 @app.get("/images/logo.svg")
-def serve_logo_svg():
+@app.get("/images/logo.png")
+@app.get("/images/logo.jpg")
+def serve_logo():
     paths = [
+        os.path.join(frontend_dir, "images", "logo.png"),
+        os.path.join(static_dir, "images", "logo.png"),
+        os.path.join(frontend_dir, "images", "logo.jpg"),
+        os.path.join(static_dir, "images", "logo.jpg"),
         os.path.join(frontend_dir, "images", "logo.svg"),
         os.path.join(static_dir, "images", "logo.svg"),
+        os.path.join(frontend_dir, "logo.png"),
+        os.path.join(static_dir, "logo.png"),
+        os.path.join(frontend_dir, "logo.jpg"),
+        os.path.join(static_dir, "logo.jpg"),
         os.path.join(frontend_dir, "logo.svg"),
         os.path.join(static_dir, "logo.svg")
     ]
     for p in paths:
         if os.path.exists(p):
-            return FileResponse(p, media_type="image/svg+xml")
-    return {"error": "Logo not found"}
-
-@app.get("/logo.jpg")
-@app.get("/logo.png")
-@app.get("/static/images/logo.jpg")
-@app.get("/static/images/logo.png")
-def serve_logo_image():
-    paths = [
-        os.path.join(frontend_dir, "images", "logo.jpg"),
-        os.path.join(static_dir, "images", "logo.jpg"),
-        os.path.join(frontend_dir, "images", "logo.png"),
-        os.path.join(static_dir, "images", "logo.png")
-    ]
-    for p in paths:
-        if os.path.exists(p):
-            return FileResponse(p, media_type="image/jpeg")
+            ext = os.path.splitext(p)[1].lower()
+            media = "image/png" if ext == ".png" else ("image/jpeg" if ext in [".jpg", ".jpeg"] else "image/svg+xml")
+            return FileResponse(p, media_type=media)
     return {"error": "Logo not found"}
 
 @app.get("/splash.mp4")

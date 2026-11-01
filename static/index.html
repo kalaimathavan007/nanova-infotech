@@ -319,9 +319,9 @@
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
 
-    <!-- Video Splash Screen Animation -->
-    <div id="splash-overlay" style="position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease;">
-        <video id="splash-video" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: contain; max-width: 650px; max-height: 650px;">
+    <!-- Full Video Splash Screen Animation -->
+    <div id="splash-overlay" onclick="document.getElementById('splash-overlay').style.display='none'" style="position: fixed; inset: 0; z-index: 9999; background: #000; display: flex; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.8s ease, visibility 0.8s ease; cursor: pointer;">
+        <video id="splash-video" autoplay muted playsinline style="width: 100%; height: 100%; object-fit: contain; max-width: 100vw; max-height: 100vh;">
             <source src="/splash.mp4" type="video/mp4">
             <source src="/images/splash.mp4" type="video/mp4">
         </video>
@@ -466,9 +466,15 @@
             };
 
             if (video) {
-                video.play().catch(() => {});
-                video.onended = hideSplash;
-                setTimeout(hideSplash, 3500);
+                video.addEventListener("ended", hideSplash);
+                video.addEventListener("error", hideSplash);
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        setTimeout(hideSplash, 2500);
+                    });
+                }
+                setTimeout(hideSplash, 15000);
             } else {
                 setTimeout(hideSplash, 1200);
             }
