@@ -30,10 +30,10 @@
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-main);
-            background-image: radial-gradient(circle at 50% 50%, rgba(29, 78, 216, 0.12), transparent 80%), url('/logo.svg');
+            background-image: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.18), transparent 70%), url('/logo.svg');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: cover, 420px;
+            background-size: cover, 500px;
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
@@ -84,22 +84,45 @@
             z-index: 10;
         }
 
-        /* Logo Display */
+        /* 3D Floating Pulse Animated Logo */
         .logo-box {
             width: 100%;
-            max-width: 220px;
+            max-width: 230px;
             margin: 0 auto 1.25rem auto;
             display: flex;
             align-items: center;
             justify-content: center;
+            perspective: 1000px;
         }
 
         .logo-img {
             width: 100%;
             height: auto;
-            max-height: 170px;
+            max-height: 180px;
             object-fit: contain;
-            filter: drop-shadow(0 0 16px rgba(29, 78, 216, 0.3));
+            animation: logo3dFloat 3.8s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.45));
+            transition: all 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05) rotateY(10deg);
+            filter: drop-shadow(0 0 30px rgba(37, 99, 235, 0.7));
+        }
+
+        @keyframes logo3dFloat {
+            0% {
+                transform: translateY(0px) scale(0.98) rotateX(0deg);
+                filter: drop-shadow(0 0 16px rgba(37, 99, 235, 0.35));
+            }
+            50% {
+                transform: translateY(-8px) scale(1.03) rotateX(4deg);
+                filter: drop-shadow(0 0 28px rgba(37, 99, 235, 0.65));
+            }
+            100% {
+                transform: translateY(0px) scale(0.98) rotateX(0deg);
+                filter: drop-shadow(0 0 16px rgba(37, 99, 235, 0.35));
+            }
         }
 
         .brand-subtitle {
