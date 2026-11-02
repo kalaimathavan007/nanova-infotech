@@ -12,7 +12,13 @@ if is_vercel or is_readonly:
 else:
     default_db_path = "./nanova.db"
 
-DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{default_db_path}")
+if "DATABASE_URL" in os.environ:
+    DATABASE_URL = os.environ["DATABASE_URL"]
+else:
+    if default_db_path.startswith("./"):
+        DATABASE_URL = f"sqlite:///{default_db_path}"
+    else:
+        DATABASE_URL = f"sqlite:////{default_db_path.lstrip('/')}"
 
 # MongoDB Database Configuration (MongoDB Atlas Cloud Cluster)
 MONGODB_URL = os.getenv("MONGODB_URL", "mongodb+srv://rajalingamrajesh70:GUD4mvvltKWWryZP@cluster0.btvmkuw.mongodb.net/?appName=Cluster0")
