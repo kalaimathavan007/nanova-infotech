@@ -31,6 +31,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Vercel Serverless Path Normalization Middleware
+@app.middleware("http")
+async def fix_vercel_path_middleware(request: Request, call_next):
+    raw_path = request.scope.get("path", "")
+    if raw_path in ["/api/index.py", "/api", "/api/"]:
+        request.scope["path"] = "/"
+    elif raw_path.startswith("/api/index.py/"):
+        request.scope["path"] = raw_path[len("/api/index.py"):]
+    elif raw_path.startswith("/api/index.py"):
+        request.scope["path"] = raw_path[len("/api/index.py"):] or "/"
+    response = await call_next(request)
+    return response
+
 # Startup DB seeding function
 @app.on_event("startup")
 def startup_db_seed():
@@ -108,24 +121,29 @@ def serve_splash_video():
 @app.get("/")
 @app.get("/index")
 @app.get("/index.html")
+@app.get("/api/index.py")
 def serve_home():
-    for f in [os.path.join(frontend_dir, "index.html"), os.path.join(static_dir, "index.html")]:
+    for f in [os.path.join(frontend_dir, "index.html"), os.path.join(static_dir, "index.html"), os.path.join(BASE_DIR, "index.html")]:
         if os.path.exists(f):
             return FileResponse(f)
     return {"message": "Welcome to Nanova Infotech Backend API. Visit /docs for OpenAPI documentation."}
 
 @app.get("/admin")
 @app.get("/admin.html")
+@app.get("/api/index.py/admin")
+@app.get("/api/index.py/admin.html")
 def serve_admin():
-    for f in [os.path.join(frontend_dir, "admin.html"), os.path.join(static_dir, "admin.html")]:
+    for f in [os.path.join(frontend_dir, "admin.html"), os.path.join(static_dir, "admin.html"), os.path.join(BASE_DIR, "admin.html")]:
         if os.path.exists(f):
             return FileResponse(f)
     return RedirectResponse(url="/")
 
 @app.get("/dashboard")
 @app.get("/dashboard.html")
+@app.get("/api/index.py/dashboard")
+@app.get("/api/index.py/dashboard.html")
 def serve_dashboard():
-    for f in [os.path.join(frontend_dir, "dashboard.html"), os.path.join(static_dir, "dashboard.html")]:
+    for f in [os.path.join(frontend_dir, "dashboard.html"), os.path.join(static_dir, "dashboard.html"), os.path.join(BASE_DIR, "dashboard.html")]:
         if os.path.exists(f):
             return FileResponse(f)
     return RedirectResponse(url="/")
