@@ -21,8 +21,8 @@ def get_mongo_db():
 
     try:
         connection_kwargs = {
-            "serverSelectionTimeoutMS": 2000,
-            "connectTimeoutMS": 2000
+            "serverSelectionTimeoutMS": 1500,
+            "connectTimeoutMS": 1500
         }
         if "mongodb+srv://" in MONGODB_URL or "ssl=true" in MONGODB_URL.lower():
             if has_certifi:
@@ -30,7 +30,7 @@ def get_mongo_db():
             connection_kwargs["tlsAllowInvalidCertificates"] = True
 
         client = MongoClient(MONGODB_URL, **connection_kwargs)
-        # Test connection ping
+        # Test connection ping with quick timeout
         client.admin.command('ping')
         mongo_client = client
         mongo_db = mongo_client[MONGODB_DB_NAME]
