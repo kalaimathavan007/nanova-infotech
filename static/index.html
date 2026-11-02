@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NANOVA INFOTECH - Official Team Portal</title>
+    <title>NANOVA INFOTECH - Official Workspace</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-dark: #030712;
-            --card-bg: rgba(15, 23, 42, 0.88);
-            --primary: #38bdf8;
-            --primary-hover: #0284c7;
-            --accent: #6366f1;
+            --bg-dark: #070614;
+            --card-bg: rgba(20, 18, 42, 0.92);
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --secondary: #06b6d4;
             --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-muted: #a7f3d0;
+            --border-glass: rgba(139, 92, 246, 0.2);
         }
 
         * {
@@ -40,39 +40,39 @@
             position: relative;
         }
 
-        /* Subtle Ambient Glow */
+        /* Ambient Violet Glow */
         .ambient-glow {
             position: fixed;
             border-radius: 50%;
-            filter: blur(120px);
+            filter: blur(130px);
             pointer-events: none;
             z-index: 1;
-            opacity: 0.35;
+            opacity: 0.45;
         }
         .glow-1 {
             top: -15%;
             left: -15%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, #38bdf8, transparent 70%);
+            background: radial-gradient(circle, #8b5cf6, transparent 70%);
         }
         .glow-2 {
             bottom: -15%;
             right: -15%;
             width: 550px;
             height: 550px;
-            background: radial-gradient(circle, #6366f1, transparent 70%);
+            background: radial-gradient(circle, #06b6d4, transparent 70%);
         }
 
         /* Professional Glass Card */
         .pro-card {
             background: var(--card-bg);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             border: 1px solid var(--border-glass);
-            border-radius: 20px;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9),
-                        0 0 30px rgba(56, 189, 248, 0.12);
+            border-radius: 22px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.95),
+                        0 0 35px rgba(139, 92, 246, 0.25);
             width: 100%;
             max-width: 440px;
             padding: 2.25rem 2rem;
@@ -96,14 +96,14 @@
             height: auto;
             max-height: 170px;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.35));
         }
 
         .brand-subtitle {
             text-align: center;
             font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 500;
+            color: #cbd5e1;
+            font-weight: 600;
             margin-bottom: 1.25rem;
             letter-spacing: 0.5px;
         }
@@ -111,10 +111,10 @@
         /* Auth Tabs */
         .tab-bar {
             display: flex;
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 27, 60, 0.8);
             padding: 0.25rem;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(139, 92, 246, 0.2);
             margin-bottom: 1.5rem;
         }
 
@@ -125,7 +125,7 @@
             font-weight: 700;
             border-radius: 9px;
             border: none;
-            color: var(--text-muted);
+            color: #94a3b8;
             background: transparent;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -136,9 +136,9 @@
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.5);
         }
 
         /* Inputs */
@@ -154,7 +154,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.6px;
-            color: #cbd5e1;
+            color: #e2e8f0;
         }
 
         .input-wrapper {
@@ -166,13 +166,13 @@
         .input-wrapper i {
             position: absolute;
             left: 0.9rem;
-            color: #64748b;
+            color: #a7f3d0;
             font-size: 0.85rem;
         }
 
         .form-input {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(15, 12, 35, 0.9);
+            border: 1px solid rgba(139, 92, 246, 0.3);
             color: #ffffff;
             border-radius: 10px;
             padding: 0.75rem 0.9rem 0.75rem 2.5rem;
@@ -183,13 +183,13 @@
         }
 
         .form-input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-            background: rgba(15, 23, 42, 0.98);
+            border-color: #a7f3d0;
+            box-shadow: 0 0 0 3px rgba(167, 243, 208, 0.25);
+            background: rgba(20, 18, 42, 0.98);
         }
 
         select.form-input option {
-            background-color: #0f172a;
+            background-color: #14122a;
             color: #ffffff;
         }
 
@@ -197,7 +197,7 @@
         .btn-submit {
             width: 100%;
             padding: 0.85rem;
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
             color: #ffffff;
             font-size: 0.875rem;
             font-weight: 700;
@@ -205,7 +205,7 @@
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+            box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -215,7 +215,7 @@
 
         .btn-submit:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+            box-shadow: 0 6px 22px rgba(139, 92, 246, 0.6);
         }
 
         /* Alert Notification */
@@ -229,14 +229,14 @@
             gap: 0.5rem;
         }
         .alert-box.error {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.4);
         }
         .alert-box.success {
-            background: rgba(16, 185, 129, 0.15);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.4);
         }
 
         .hidden { display: none !important; }
@@ -262,7 +262,7 @@
         <div class="logo-box">
             <img src="/logo.svg" alt="Nanova Infotech Logo" class="logo-img">
         </div>
-        <p class="brand-subtitle">Nanova Infotech Internal Team Workspace</p>
+        <p class="brand-subtitle">Nanova Infotech Official Team Workspace</p>
 
         <!-- Auth Tabs -->
         <div class="tab-bar">
@@ -283,7 +283,7 @@
                 <label for="login-email" class="form-label">Email Address</label>
                 <div class="input-wrapper">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="login-email" required autocomplete="off" inputmode="email" class="form-input" placeholder="name@nanovainfotech.com">
+                    <input type="email" id="login-email" required autocomplete="off" inputmode="email" class="form-input" placeholder="kalaimathavan007@gmail.com">
                 </div>
             </div>
 
@@ -307,7 +307,7 @@
                 <label for="reg-name" class="form-label">Full Name *</label>
                 <div class="input-wrapper">
                     <i class="fa-solid fa-user"></i>
-                    <input type="text" id="reg-name" required autocomplete="off" class="form-input" placeholder="e.g. Rajesh Kumar">
+                    <input type="text" id="reg-name" required autocomplete="off" class="form-input" placeholder="e.g. Kalaimathavan">
                 </div>
             </div>
 

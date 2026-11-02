@@ -53,19 +53,19 @@ def init_mongo_db():
     if not setting:
         db.admin_settings.insert_one({
             "incubation_name": "Nanova Infotech",
-            "allowed_admin_emails": "admin@nanovainfotech.com, rajalingamrajesh70@gmail.com, admin@incubation.com, kalai@nayagi.com, director@incubation.com",
+            "allowed_admin_emails": "kalaimathavan007@gmail.com, admin@nanovainfotech.com",
             "announcement": "Welcome to Nanova Infotech Workspace! Teams please submit your daily attendance and stay connected in Chat.",
             "updated_at": datetime.utcnow()
         })
 
-    # Seed Primary Admin User ONLY (No sample teams)
-    admin_email = "rajalingamrajesh70@gmail.com"
+    # Seed Master Admin User ONLY
+    admin_email = "kalaimathavan007@gmail.com"
     admin_user = db.users.find_one({"email": admin_email})
     if not admin_user:
         db.users.insert_one({
             "email": admin_email,
-            "hashed_password": get_password_hash("nayagi1234"),
-            "full_name": "Rajalingam Rajesh",
+            "hashed_password": get_password_hash("nanova1234"),
+            "full_name": "Master Admin (Kalai)",
             "role": "admin",
             "team_id": None,
             "created_at": datetime.utcnow()
@@ -73,7 +73,7 @@ def init_mongo_db():
     else:
         db.users.update_one(
             {"email": admin_email},
-            {"$set": {"hashed_password": get_password_hash("nayagi1234"), "role": "admin"}}
+            {"$set": {"hashed_password": get_password_hash("nanova1234"), "role": "admin"}}
         )
 
 # --- USER OPERATIONS ---

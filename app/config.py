@@ -11,11 +11,8 @@ DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{default_db_path}")
 MONGODB_URL = os.getenv("MONGODB_URL", "mongodb+srv://rajalingamrajesh70:GUD4mvvltKWWryZP@cluster0.btvmkuw.mongodb.net/?appName=Cluster0")
 MONGODB_DB_NAME = os.getenv("MONGODB_DB_NAME", "nanova_infotech_db")
 
-# Default admin emails allowed to access admin dashboard
+# Master Admin Emails allowed to access Master Admin Dashboard & reply to messages
 DEFAULT_ADMIN_EMAILS = [
-    "admin@nanovainfotech.com",
-    "rajalingamrajesh70@gmail.com",
-    "admin@incubation.com",
-    "kalai@nayagi.com",
-    "director@incubation.com"
+    "kalaimathavan007@gmail.com",
+    "admin@nanovainfotech.com"
 ]
