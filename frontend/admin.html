@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Admin Dashboard - Nayagi Incubation Council</title>
+    <title>Nanova Infotech - Admin Control Center</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,16 +50,15 @@
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-2">
 
             <div class="flex items-center gap-2.5">
-                <!-- Peacock Logo Image Badge -->
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-950 p-0.5 border border-amber-500/30 shadow-md shrink-0 flex items-center justify-center overflow-hidden">
-                    <img src="/logo.svg" alt="Nayagi Council Logo" class="w-full h-full object-contain">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-950 p-0.5 border border-sky-500/30 shadow-md shrink-0 flex items-center justify-center overflow-hidden">
+                    <img src="/logo.svg" alt="Nanova Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
                     <h1 class="font-bold text-xs sm:text-base text-white flex items-center gap-1.5 flex-wrap">
-                        <span id="header-incubation-name">Nayagi Incubation Council</span>
-                        <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 uppercase font-semibold">Admin Portal</span>
+                        <span id="header-incubation-name">Nanova Infotech</span>
+                        <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 uppercase font-semibold">Admin Panel</span>
                     </h1>
-                    <p class="text-[10px] sm:text-xs text-amber-300/80 font-medium">INSPIRE | INNOVATE | INCUBATE | IMPACT</p>
+                    <p class="text-[10px] sm:text-xs text-sky-400 font-medium">NANOVA INFOTECH | OFFICIAL TEAM WORKSPACE & CHAT</p>
                 </div>
             </div>
 
@@ -73,7 +72,7 @@
                     <i class="fa-solid fa-user-shield text-indigo-400 text-xs"></i>
                     <div class="text-left">
                         <div id="admin-user-name" class="text-[11px] sm:text-xs font-semibold text-white leading-tight">Admin User</div>
-                        <div id="admin-user-email" class="text-[9px] sm:text-[10px] text-slate-400 leading-tight hidden sm:block">admin@incubation.com</div>
+                        <div id="admin-user-email" class="text-[9px] sm:text-[10px] text-slate-400 leading-tight hidden sm:block">admin@nanovainfotech.com</div>
                     </div>
                 </div>
 
@@ -122,9 +121,6 @@
                             <i class="fa-solid fa-sitemap"></i>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2.5 flex items-center gap-1 truncate">
-                        <i class="fa-solid fa-check-circle text-emerald-400"></i> Incubated startups
-                    </p>
                 </div>
 
                 <div class="glass-panel p-4 sm:p-5 relative overflow-hidden">
@@ -137,9 +133,6 @@
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2.5 flex items-center gap-1 truncate">
-                        <i class="fa-solid fa-shield-cat text-sky-400"></i> Registered accounts
-                    </p>
                 </div>
 
                 <div class="glass-panel p-4 sm:p-5 relative overflow-hidden">
@@ -152,9 +145,6 @@
                             <i class="fa-solid fa-id-card"></i>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2.5 flex items-center gap-1 truncate">
-                        <i class="fa-solid fa-user-plus text-emerald-400"></i> Total founders
-                    </p>
                 </div>
 
                 <div class="glass-panel p-4 sm:p-5 relative overflow-hidden">
@@ -167,9 +157,6 @@
                             <i class="fa-solid fa-calendar-day"></i>
                         </div>
                     </div>
-                    <p class="text-[10px] sm:text-[11px] text-slate-400 mt-2.5 flex items-center gap-1 truncate">
-                        <i class="fa-solid fa-clock text-amber-400"></i> Submissions today
-                    </p>
                 </div>
             </div>
 
@@ -226,14 +213,14 @@
 
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <h2 class="text-base sm:text-lg font-bold text-white">Incubated Startup Teams</h2>
-                    <p class="text-xs text-slate-400">Manage startup teams, domains, and member rosters</p>
+                    <h2 class="text-base sm:text-lg font-bold text-white">Nanova Departments & Teams</h2>
+                    <p class="text-xs text-slate-400">Manage department teams and employee rosters</p>
                 </div>
 
                 <div class="flex items-center gap-2">
                     <div class="relative flex-1 sm:flex-initial">
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-500 text-xs"></i>
-                        <input type="text" id="team-search-input" onkeyup="filterTeamsList()" placeholder="Search team or domain..." class="glass-input pl-8 py-1.5 text-xs w-full sm:w-64">
+                        <input type="text" id="team-search-input" onkeyup="filterTeamsList()" placeholder="Search team..." class="glass-input pl-8 py-1.5 text-xs w-full sm:w-64">
                     </div>
 
                     <button type="button" onclick="openCreateTeamModal()" class="px-3.5 py-2 rounded-xl bg-indigo-600 active:bg-indigo-700 hover:bg-indigo-500 text-xs font-semibold text-white flex items-center gap-1.5 transition-all shadow-md shadow-indigo-600/20 shrink-0">
@@ -256,7 +243,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
                     <div>
                         <h2 class="text-base sm:text-lg font-bold text-white">Daily Attendance Matrix</h2>
-                        <p class="text-xs text-slate-400">Review daily attendance and work progress submitted by teams</p>
+                        <p class="text-xs text-slate-400">Review daily attendance and work progress submitted by employees</p>
                     </div>
 
                     <!-- Filters & Export -->
@@ -304,7 +291,7 @@
                 <!-- Team Selection Sidebar -->
                 <div id="chat-teams-sidebar" class="glass-panel p-3.5 sm:p-4 flex flex-col h-full">
                     <h3 class="text-xs sm:text-sm font-bold text-white mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-comments text-indigo-400"></i> Select Team to Message
+                        <i class="fa-solid fa-comments text-indigo-400"></i> Select Team / Employee
                     </h3>
                     <div id="chat-teams-list" class="flex-1 overflow-y-auto space-y-2 pr-1">
                         <!-- Dynamic Team Chat List -->
@@ -317,13 +304,12 @@
                     <!-- Selected Team Bar -->
                     <div id="chat-header" class="pb-3 border-b border-slate-800 flex items-center justify-between gap-2">
                         <div class="flex items-center gap-2">
-                            <!-- Mobile Back Button -->
                             <button type="button" onclick="showMobileChatTeamsList()" class="lg:hidden p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white" title="Back to Teams List">
                                 <i class="fa-solid fa-arrow-left text-xs"></i>
                             </button>
 
                             <div>
-                                <h3 id="chat-selected-team-name" class="text-xs sm:text-base font-bold text-white">Select a Team</h3>
+                                <h3 id="chat-selected-team-name" class="text-xs sm:text-base font-bold text-white">Select an Employee Conversation</h3>
                                 <p id="chat-selected-team-domain" class="text-[10px] sm:text-xs text-slate-400">Choose a team to start direct messaging</p>
                             </div>
                         </div>
@@ -333,7 +319,7 @@
                     <div id="chat-messages-container" class="flex-1 overflow-y-auto my-3 space-y-2.5 pr-1">
                         <div class="h-full flex flex-col items-center justify-center text-slate-500 text-xs">
                             <i class="fa-solid fa-comments text-3xl mb-2 text-slate-700"></i>
-                            Select a team to view and send direct messages.
+                            Select an employee conversation to view and send direct messages.
                         </div>
                     </div>
 
@@ -355,56 +341,6 @@
         <!-- TAB 5: DATABASE & SETTINGS -->
         <section id="tab-content-settings" class="tab-content hidden animate-fade-in max-w-4xl mx-auto space-y-4 sm:space-y-6">
 
-            <!-- DATABASE STATUS CARDS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                <!-- RELATIONAL DATABASE CARD -->
-                <div class="glass-panel p-4 sm:p-5 border-l-4 border-l-emerald-500 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-xs sm:text-sm text-white flex items-center gap-2">
-                                <i class="fa-solid fa-database text-emerald-400"></i> Relational Database (SQL)
-                            </h3>
-                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">Active</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-3">Primary engine for user auth, teams, members, and attendance records.</p>
-
-                        <div class="space-y-1 text-xs text-slate-300 font-mono bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
-                            <div>Engine: <strong class="text-emerald-400 font-sans">SQLite 3 (SQLAlchemy)</strong></div>
-                            <div>Storage: <strong class="text-slate-200">./incubation.db</strong></div>
-                        </div>
-                    </div>
-
-                    <button type="button" onclick="exportDatabaseBackup()" class="mt-3 w-full py-2 px-3 rounded-lg bg-emerald-600/20 active:bg-emerald-600/40 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
-                        <i class="fa-solid fa-download"></i> Download Full DB Backup (JSON)
-                    </button>
-                </div>
-
-                <!-- MONGODB NOSQL DATABASE CARD -->
-                <div class="glass-panel p-4 sm:p-5 border-l-4 border-l-emerald-600 flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <h3 class="font-bold text-xs sm:text-sm text-white flex items-center gap-2">
-                                <i class="fa-solid fa-leaf text-emerald-500"></i> MongoDB NoSQL Database
-                            </h3>
-                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">Supported</span>
-                        </div>
-                        <p class="text-xs text-slate-400 mb-3">PyMongo & Motor drivers installed for document storage & Atlas cluster integration.</p>
-
-                        <div class="space-y-1 text-xs text-slate-300 font-mono bg-slate-900/80 p-2.5 rounded-lg border border-slate-800">
-                            <div>Driver: <strong class="text-emerald-400 font-sans">PyMongo 4.18 + Motor 3.7</strong></div>
-                            <div>Database: <strong class="text-slate-200">nayagi_incubation_db</strong></div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 p-2.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-[11px] text-sky-300 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-info text-sky-400"></i>
-                        <span>Set <code class="bg-slate-900 px-1 py-0.5 rounded text-[10px] font-mono">MONGODB_URL</code> in environment to connect MongoDB Atlas!</span>
-                    </div>
-                </div>
-
-            </div>
-
             <!-- ADMIN CONFIGURATION FORM -->
             <div class="glass-panel p-4 sm:p-6 border-l-4 border-l-indigo-500">
                 <h2 class="text-base sm:text-lg font-bold text-white mb-1">Admin Portal Configuration</h2>
@@ -413,7 +349,7 @@
                 <form onsubmit="saveAdminSettings(event)" class="space-y-4">
 
                     <div>
-                        <label for="settings-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Incubation Center Name</label>
+                        <label for="settings-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Company Workspace Name</label>
                         <input type="text" id="settings-name" required class="w-full glass-input text-xs sm:text-sm">
                     </div>
 
@@ -422,12 +358,6 @@
                             Authorized Admin Email Whitelist (Comma Separated)
                         </label>
                         <textarea id="settings-admin-emails" rows="3" required class="w-full glass-input text-xs font-mono"></textarea>
-                        <div class="mt-2 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 flex items-start gap-2">
-                            <i class="fa-solid fa-shield-halved text-amber-400 mt-0.5"></i>
-                            <span>
-                                <strong>Strict Access Protection:</strong> Only users registering or logging in with the email addresses listed here will be granted Admin access to this dashboard. All other users will be restricted to the User Team portal.
-                            </span>
-                        </div>
                     </div>
 
                     <div>
@@ -452,7 +382,7 @@
         <div class="glass-panel max-w-md w-full p-5 sm:p-6 animate-fade-in relative max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-3">
                 <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-plus-circle text-indigo-400"></i> Add New Startup Team
+                    <i class="fa-solid fa-plus-circle text-indigo-400"></i> Add New Department Team
                 </h3>
                 <button type="button" onclick="closeModal('modal-create-team')" class="text-slate-400 hover:text-white p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
@@ -462,152 +392,27 @@
             <form onsubmit="handleCreateTeamSubmit(event)" class="space-y-3.5">
                 <div>
                     <label for="modal-team-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Team Name</label>
-                    <input type="text" id="modal-team-name" required placeholder="e.g. NextGen Robotics" class="w-full glass-input text-xs sm:text-sm">
+                    <input type="text" id="modal-team-name" required placeholder="e.g. Software Development" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div>
-                    <label for="modal-team-idea" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Startup Idea Title</label>
-                    <input type="text" id="modal-team-idea" placeholder="e.g. Autonomous Warehouse Drone" class="w-full glass-input text-xs sm:text-sm">
+                    <label for="modal-team-idea" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Project Title</label>
+                    <input type="text" id="modal-team-idea" placeholder="e.g. Core App Platform" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div>
-                    <label for="modal-team-domain" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Domain / Sector</label>
-                    <select id="modal-team-domain" onchange="toggleOtherDomain('modal-team-domain', 'modal-team-domain-other-container')" class="w-full glass-input text-xs sm:text-sm">
-                        <option value="AI & Robotics">AI & Robotics</option>
-                        <option value="IoT">IoT & Hardware</option>
-                        <option value="AgriTech">AgriTech</option>
-                        <option value="HealthTech">HealthTech</option>
-                        <option value="EdTech">EdTech</option>
-                        <option value="FinTech">FinTech</option>
-                        <option value="CleanTech & Energy">CleanTech & Energy</option>
-                        <option value="General Software">General Software</option>
-                        <option value="Other">Other (Specify Custom Domain)</option>
-                    </select>
-
-                    <div id="modal-team-domain-other-container" class="hidden mt-2">
-                        <label for="modal-team-domain-other" class="sr-only">Custom Domain</label>
-                        <input type="text" id="modal-team-domain-other" placeholder="Type custom domain..." class="w-full glass-input text-xs sm:text-sm border-indigo-500/50">
-                    </div>
+                    <label for="modal-team-domain" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Department Sector</label>
+                    <input type="text" id="modal-team-domain" placeholder="Engineering" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div>
                     <label for="modal-team-desc" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Description</label>
-                    <textarea id="modal-team-desc" rows="2" placeholder="Brief summary of startup idea..." class="w-full glass-input text-xs sm:text-sm"></textarea>
+                    <textarea id="modal-team-desc" rows="2" placeholder="Brief summary of department responsibilities..." class="w-full glass-input text-xs sm:text-sm"></textarea>
                 </div>
 
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" onclick="closeModal('modal-create-team')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">Cancel</button>
                     <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white">Create Team</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL: EDIT TEAM -->
-    <div id="modal-edit-team" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
-        <div class="glass-panel max-w-md w-full p-5 sm:p-6 animate-fade-in relative max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-3">
-                <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-pen-to-square text-indigo-400"></i> Edit Startup Team
-                </h3>
-                <button type="button" onclick="closeModal('modal-edit-team')" class="text-slate-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <form onsubmit="handleEditTeamSubmit(event)" class="space-y-3.5">
-                <input type="hidden" id="edit-team-id">
-
-                <div>
-                    <label for="edit-team-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Team Name</label>
-                    <input type="text" id="edit-team-name" required class="w-full glass-input text-xs sm:text-sm">
-                </div>
-
-                <div>
-                    <label for="edit-team-idea" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Startup Idea Title</label>
-                    <input type="text" id="edit-team-idea" class="w-full glass-input text-xs sm:text-sm">
-                </div>
-
-                <div>
-                    <label for="edit-team-domain" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Domain / Sector</label>
-                    <select id="edit-team-domain" onchange="toggleOtherDomain('edit-team-domain', 'edit-team-domain-other-container')" class="w-full glass-input text-xs sm:text-sm">
-                        <option value="AI & Robotics">AI & Robotics</option>
-                        <option value="IoT">IoT & Hardware</option>
-                        <option value="AgriTech">AgriTech</option>
-                        <option value="HealthTech">HealthTech</option>
-                        <option value="EdTech">EdTech</option>
-                        <option value="FinTech">FinTech</option>
-                        <option value="CleanTech & Energy">CleanTech & Energy</option>
-                        <option value="General Software">General Software</option>
-                        <option value="Other">Other (Specify Custom Domain)</option>
-                    </select>
-
-                    <div id="edit-team-domain-other-container" class="hidden mt-2">
-                        <label for="edit-team-domain-other" class="sr-only">Custom Domain</label>
-                        <input type="text" id="edit-team-domain-other" placeholder="Type custom domain..." class="w-full glass-input text-xs sm:text-sm border-indigo-500/50">
-                    </div>
-                </div>
-
-                <div>
-                    <label for="edit-team-status" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Incubation Status</label>
-                    <select id="edit-team-status" class="w-full glass-input text-xs sm:text-sm">
-                        <option value="Incubated">Incubated</option>
-                        <option value="Pre-Incubation">Pre-Incubation</option>
-                        <option value="Graduated">Graduated</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="edit-team-desc" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Description</label>
-                    <textarea id="edit-team-desc" rows="2" class="w-full glass-input text-xs sm:text-sm"></textarea>
-                </div>
-
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('modal-edit-team')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">Cancel</button>
-                    <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL: ADD TEAM MEMBER -->
-    <div id="modal-add-member" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
-        <div class="glass-panel max-w-md w-full p-5 sm:p-6 animate-fade-in relative max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-3">
-                <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-user-plus text-indigo-400"></i> Add Member to Team
-                </h3>
-                <button type="button" onclick="closeModal('modal-add-member')" class="text-slate-400 hover:text-white p-1">
-                    <i class="fa-solid fa-xmark text-lg"></i>
-                </button>
-            </div>
-
-            <form onsubmit="handleAddMemberSubmit(event)" class="space-y-3.5">
-                <input type="hidden" id="modal-member-team-id">
-
-                <div>
-                    <label for="modal-member-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Member Full Name</label>
-                    <input type="text" id="modal-member-name" required placeholder="Full Name" class="w-full glass-input text-xs sm:text-sm">
-                </div>
-
-                <div>
-                    <label for="modal-member-role" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Role in Team</label>
-                    <input type="text" id="modal-member-role" required placeholder="e.g. Lead Engineer, UI/UX Designer, Co-founder" class="w-full glass-input text-xs sm:text-sm">
-                </div>
-
-                <div>
-                    <label for="modal-member-email" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email Address</label>
-                    <input type="email" id="modal-member-email" placeholder="member@email.com" class="w-full glass-input text-xs sm:text-sm">
-                </div>
-
-                <div>
-                    <label for="modal-member-phone" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Phone Number</label>
-                    <input type="tel" id="modal-member-phone" placeholder="Mobile Number" class="w-full glass-input text-xs sm:text-sm">
-                </div>
-
-                <div class="flex justify-end gap-2 pt-2">
-                    <button type="button" onclick="closeModal('modal-add-member')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300">Cancel</button>
-                    <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white">Add Member</button>
                 </div>
             </form>
         </div>

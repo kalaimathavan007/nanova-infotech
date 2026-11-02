@@ -2,44 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Dashboard - Nayagi Incubation Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nanova Infotech - Employee Workspace & Messaging</title>
+
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <!-- Embedded Fallback Styles for 100% reliable UI layout -->
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .glass-input {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 0.7rem 1rem;
+            font-size: 0.85rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
 
     <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    <div id="toast-container" class="fixed top-4 right-4 left-4 sm:left-auto sm:w-80 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <!-- Top Navigation Header -->
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-2">
 
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-sky-600/30 border border-sky-500/40 text-sky-400 flex items-center justify-center font-bold text-lg shadow-lg shadow-sky-600/20">
-                    <i class="fa-solid fa-people-group"></i>
+            <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-950 p-0.5 border border-sky-500/30 shadow-md shrink-0 flex items-center justify-center overflow-hidden">
+                    <img src="/logo.svg" alt="Nanova Logo" class="w-full h-full object-contain">
                 </div>
                 <div>
-                    <h1 class="font-bold text-base text-white flex items-center gap-2">
-                        <span id="user-team-display">My Team</span>
-                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 uppercase font-semibold">Incubated Team</span>
+                    <h1 class="font-bold text-xs sm:text-base text-white flex items-center gap-1.5 flex-wrap">
+                        <span id="user-team-display">Nanova Workspace</span>
+                        <span class="text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 uppercase font-semibold">Nanova Team</span>
                     </h1>
-                    <p class="text-xs text-slate-400">Team Workspace & Portal</p>
+                    <p class="text-[10px] sm:text-xs text-sky-400 font-medium">NANOVA INFOTECH | OFFICIAL TEAM WORKSPACE & CHAT</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-4">
-                <div class="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/60">
-                    <i class="fa-solid fa-circle-user text-sky-400"></i>
+            <div class="flex items-center gap-2 sm:gap-4">
+                <div class="flex items-center gap-2 bg-slate-800/80 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl border border-slate-700/60">
+                    <i class="fa-solid fa-circle-user text-sky-400 text-xs"></i>
                     <div class="text-left">
-                        <div id="user-display-name" class="text-xs font-semibold text-white leading-tight">User Name</div>
-                        <div id="user-display-email" class="text-[10px] text-slate-400 leading-tight">user@email.com</div>
+                        <div id="user-display-name" class="text-[11px] sm:text-xs font-semibold text-white leading-tight">User Name</div>
+                        <div id="user-display-email" class="text-[9px] sm:text-[10px] text-slate-400 leading-tight hidden sm:block">user@email.com</div>
                     </div>
                 </div>
 
-                <button onclick="logout()" class="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 transition-all text-sm shadow-sm" title="Logout">
+                <button type="button" onclick="logout()" class="p-2 rounded-lg bg-red-500/10 active:bg-red-500/30 hover:bg-red-500/20 text-red-400 border border-red-500/20 transition-all text-xs sm:text-sm shadow-sm" title="Logout">
                     <i class="fa-solid fa-right-from-bracket"></i>
                 </button>
             </div>
@@ -48,40 +80,40 @@
     </header>
 
     <!-- Main Content Container -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
 
         <!-- Global Announcement Banner -->
-        <div id="user-announcement-banner" class="mb-6 p-4 rounded-xl bg-indigo-950/60 border border-indigo-800/60 text-xs text-indigo-200 flex items-start gap-3 shadow-md">
-            <i class="fa-solid fa-bullhorn text-indigo-400 text-lg mt-0.5"></i>
+        <div id="user-announcement-banner" class="mb-5 p-3.5 sm:p-4 rounded-xl bg-indigo-950/60 border border-indigo-800/60 text-xs text-indigo-200 flex items-start gap-2.5 shadow-md">
+            <i class="fa-solid fa-bullhorn text-indigo-400 text-base sm:text-lg mt-0.5 shrink-0"></i>
             <div>
-                <strong class="font-semibold text-white">Announcement from Incubation Center:</strong>
-                <p id="user-announcement-text" class="mt-0.5 text-slate-300 leading-relaxed">Loading announcement...</p>
+                <strong class="font-semibold text-white">Announcement:</strong>
+                <p id="user-announcement-text" class="mt-0.5 text-slate-300 leading-relaxed text-[11px] sm:text-xs">Loading announcement...</p>
             </div>
         </div>
 
-        <!-- Tab Navigation -->
-        <div class="flex overflow-x-auto border-b border-slate-800 gap-2 mb-6 pb-2 scrollbar-none">
-            <button onclick="switchUserTab('team')" id="utab-team" class="px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all bg-sky-600 text-white shadow-lg shadow-sky-600/20">
-                <i class="fa-solid fa-users"></i> Team Profile & Members
+        <!-- Swipeable Tab Navigation -->
+        <div class="flex overflow-x-auto whitespace-nowrap border-b border-slate-800 gap-1.5 mb-5 pb-2.5 scrollbar-none">
+            <button type="button" onclick="switchUserTab('team')" id="utab-team" class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all bg-sky-600 text-white shadow-lg shadow-sky-600/20 shrink-0">
+                <i class="fa-solid fa-users"></i> Team Profile
             </button>
-            <button onclick="switchUserTab('attendance')" id="utab-attendance" class="px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-700/60">
+            <button type="button" onclick="switchUserTab('attendance')" id="utab-attendance" class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-700/60 shrink-0">
                 <i class="fa-solid fa-calendar-check"></i> Daily Attendance
             </button>
-            <button onclick="switchUserTab('chat')" id="utab-chat" class="px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-700/60">
-                <i class="fa-solid fa-comment-dots"></i> Contact Incubation Admin
+            <button type="button" onclick="switchUserTab('chat')" id="utab-chat" class="px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-700/60 shrink-0">
+                <i class="fa-solid fa-comment-dots"></i> Contact Admin
             </button>
         </div>
 
         <!-- TAB 1: TEAM PROFILE & MEMBERS -->
-        <section id="ucontent-team" class="space-y-6 animate-fade-in">
+        <section id="ucontent-team" class="space-y-4 sm:space-y-6 animate-fade-in">
 
             <!-- Team Info Card -->
-            <div class="glass-panel p-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div class="glass-panel p-4 sm:p-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-5 border-b border-slate-800">
                     <div>
-                        <span id="u-team-domain-tag" class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">Domain: Software</span>
-                        <h2 id="u-team-name-card" class="text-2xl font-extrabold text-white mt-2">Team Name</h2>
-                        <p id="u-team-idea-card" class="text-sm font-semibold text-slate-300 mt-1">Startup Idea Title</p>
+                        <span id="u-team-domain-tag" class="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20">Domain: Software</span>
+                        <h2 id="u-team-name-card" class="text-xl sm:text-2xl font-extrabold text-white mt-2">Team Name</h2>
+                        <p id="u-team-idea-card" class="text-xs sm:text-sm font-semibold text-slate-300 mt-1">Startup Idea Title</p>
                         <p id="u-team-desc-card" class="text-xs text-slate-400 mt-2 max-w-3xl leading-relaxed">Description...</p>
                     </div>
 
@@ -92,17 +124,17 @@
                 </div>
 
                 <!-- Team Members Header -->
-                <div class="flex justify-between items-center my-4">
-                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <div class="flex justify-between items-center my-3.5">
+                    <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
                         <i class="fa-solid fa-id-card text-sky-400"></i> Team Members Roster
                     </h3>
-                    <button onclick="openUserAddMemberModal()" class="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-xs font-semibold text-white flex items-center gap-1.5 transition-all shadow-md shadow-sky-600/20">
-                        <i class="fa-solid fa-plus"></i> Add Team Member
+                    <button type="button" onclick="openUserAddMemberModal()" class="px-3 py-1.5 rounded-lg bg-sky-600 active:bg-sky-700 hover:bg-sky-500 text-xs font-semibold text-white flex items-center gap-1 transition-all shadow-md shadow-sky-600/20">
+                        <i class="fa-solid fa-plus"></i> Add Member
                     </button>
                 </div>
 
                 <!-- Members List -->
-                <div id="u-team-members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div id="u-team-members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     <!-- Dynamic Member Cards -->
                 </div>
             </div>
@@ -110,26 +142,26 @@
         </section>
 
         <!-- TAB 2: DAILY ATTENDANCE -->
-        <section id="ucontent-attendance" class="hidden space-y-6 animate-fade-in">
+        <section id="ucontent-attendance" class="hidden space-y-4 sm:space-y-6 animate-fade-in">
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
 
                 <!-- Attendance Form -->
-                <div class="glass-panel p-6 border-l-4 border-l-sky-500">
-                    <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+                <div class="glass-panel p-4 sm:p-6 border-l-4 border-l-sky-500">
+                    <h3 class="text-sm sm:text-base font-bold text-white mb-1 flex items-center gap-2">
                         <i class="fa-solid fa-pen-clip text-sky-400"></i> Submit Daily Attendance
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Record your team's presence and daily work progress</p>
 
-                    <form onsubmit="handleAttendanceSubmit(event)" class="space-y-4">
+                    <form onsubmit="handleAttendanceSubmit(event)" class="space-y-3.5">
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Date</label>
-                            <input type="date" id="att-date" required class="w-full glass-input text-xs" title="Select Attendance Date">
+                            <label for="att-date" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Date</label>
+                            <input type="date" id="att-date" required class="w-full glass-input text-xs sm:text-sm" title="Select Attendance Date">
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Attendance Status</label>
-                            <select id="att-status" required class="w-full glass-input text-xs">
+                            <label for="att-status" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Attendance Status</label>
+                            <select id="att-status" required class="w-full glass-input text-xs sm:text-sm">
                                 <option value="Present">Present (Working On-site)</option>
                                 <option value="Working Remotely">Working Remotely</option>
                                 <option value="Half Day">Half Day</option>
@@ -138,11 +170,11 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Daily Work Summary / Milestones</label>
-                            <textarea id="att-summary" rows="4" required placeholder="What milestones did your team accomplish today?" class="w-full glass-input text-xs"></textarea>
+                            <label for="att-summary" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Daily Work Summary / Milestones</label>
+                            <textarea id="att-summary" rows="3" required placeholder="What milestones did your team accomplish today?" class="w-full glass-input text-xs sm:text-sm"></textarea>
                         </div>
 
-                        <button type="submit" id="btn-att-submit" class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-lg text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-sky-600/30">
+                        <button type="submit" id="btn-att-submit" class="w-full py-2.5 bg-sky-600 active:bg-sky-700 hover:bg-sky-500 text-white font-semibold rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-sky-600/30">
                             <i class="fa-solid fa-check"></i>
                             <span>Submit Attendance</span>
                         </button>
@@ -150,19 +182,19 @@
                 </div>
 
                 <!-- Past Submissions History Table -->
-                <div class="lg:col-span-2 glass-panel p-6">
-                    <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                <div class="lg:col-span-2 glass-panel p-4 sm:p-6">
+                    <h3 class="text-sm sm:text-base font-bold text-white mb-3 flex items-center gap-2">
                         <i class="fa-solid fa-clock-rotate-left text-sky-400"></i> Attendance Submission History
                     </h3>
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs text-slate-300">
+                    <div class="table-responsive">
+                        <table class="w-full text-left text-xs text-slate-300 min-w-[500px]">
                             <thead class="bg-slate-900/80 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
                                 <tr>
-                                    <th class="py-3 px-4">Date</th>
-                                    <th class="py-3 px-4">Status</th>
-                                    <th class="py-3 px-4">Work Summary Log</th>
-                                    <th class="py-3 px-4">Submitted By</th>
+                                    <th class="py-2.5 px-3">Date</th>
+                                    <th class="py-2.5 px-3">Status</th>
+                                    <th class="py-2.5 px-3">Work Summary Log</th>
+                                    <th class="py-2.5 px-3">Submitted By</th>
                                 </tr>
                             </thead>
                             <tbody id="u-att-history-tbody" class="divide-y divide-slate-800/60">
@@ -179,22 +211,22 @@
         <!-- TAB 3: CONTACT ADMIN (CHAT) -->
         <section id="ucontent-chat" class="hidden animate-fade-in">
 
-            <div class="glass-panel p-6 max-w-4xl mx-auto h-[600px] flex flex-col relative">
+            <div class="glass-panel p-4 sm:p-6 max-w-4xl mx-auto h-[550px] sm:h-[600px] flex flex-col relative">
 
-                <div class="pb-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="pb-3 border-b border-slate-800 flex items-center justify-between">
                     <div>
-                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <h3 class="text-xs sm:text-base font-bold text-white flex items-center gap-1.5">
                             <i class="fa-solid fa-comments text-sky-400"></i> Contact Incubation Admin
                         </h3>
-                        <p class="text-xs text-slate-400">Direct 1-on-1 private messaging channel with administration</p>
+                        <p class="text-[10px] sm:text-xs text-slate-400">Direct 1-on-1 private messaging channel</p>
                     </div>
-                    <span class="text-[11px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active Channel
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Active
                     </span>
                 </div>
 
                 <!-- Chat History Window -->
-                <div id="u-chat-window" class="flex-1 overflow-y-auto my-4 space-y-3 pr-2">
+                <div id="u-chat-window" class="flex-1 overflow-y-auto my-3 space-y-2.5 pr-1">
                     <div class="h-full flex flex-col items-center justify-center text-slate-500 text-xs">
                         <i class="fa-solid fa-spinner fa-spin text-2xl mb-2 text-sky-400"></i>
                         Loading conversation history...
@@ -202,9 +234,9 @@
                 </div>
 
                 <!-- Message Input -->
-                <form id="u-chat-form" onsubmit="sendUserChatMessage(event)" class="pt-3 border-t border-slate-800 flex items-center gap-2">
-                    <input type="text" id="u-chat-input" required placeholder="Type message to incubation admin..." class="flex-1 glass-input text-xs">
-                    <button type="submit" id="u-chat-send-btn" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-md shadow-sky-600/20">
+                <form id="u-chat-form" onsubmit="sendUserChatMessage(event)" class="pt-2.5 border-t border-slate-800 flex items-center gap-2">
+                    <input type="text" id="u-chat-input" required placeholder="Type message to incubation admin..." class="flex-1 glass-input text-xs py-2">
+                    <button type="submit" id="u-chat-send-btn" class="px-4 py-2 bg-sky-600 active:bg-sky-700 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition-all shadow-md shadow-sky-600/20 shrink-0">
                         <span>Send</span>
                         <i class="fa-solid fa-paper-plane"></i>
                     </button>
@@ -217,36 +249,36 @@
     </main>
 
     <!-- MODAL: ADD TEAM MEMBER (USER) -->
-    <div id="modal-user-add-member" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-panel max-w-md w-full p-6 animate-fade-in relative">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-base font-bold text-white flex items-center gap-2">
+    <div id="modal-user-add-member" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-3 sm:p-4">
+        <div class="glass-panel max-w-md w-full p-5 sm:p-6 animate-fade-in relative max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
                     <i class="fa-solid fa-user-plus text-sky-400"></i> Add Member to My Team
                 </h3>
-                <button onclick="closeModal('modal-user-add-member')" class="text-slate-400 hover:text-white">
+                <button type="button" onclick="closeModal('modal-user-add-member')" class="text-slate-400 hover:text-white p-1">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
-            <form onsubmit="handleUserAddMemberSubmit(event)" class="space-y-4">
+            <form onsubmit="handleUserAddMemberSubmit(event)" class="space-y-3.5">
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Full Name</label>
-                    <input type="text" id="u-member-name" required placeholder="Member Full Name" class="w-full glass-input text-xs">
+                    <label for="u-member-name" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Full Name</label>
+                    <input type="text" id="u-member-name" required placeholder="Member Full Name" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Role in Team</label>
-                    <input type="text" id="u-member-role" required placeholder="e.g. Lead Developer, Marketing, Co-founder" class="w-full glass-input text-xs">
+                    <label for="u-member-role" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Role in Team</label>
+                    <input type="text" id="u-member-role" required placeholder="e.g. Lead Developer, Marketing, Co-founder" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email Address</label>
-                    <input type="email" id="u-member-email" placeholder="member@email.com" class="w-full glass-input text-xs">
+                    <label for="u-member-email" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Email Address</label>
+                    <input type="email" id="u-member-email" placeholder="member@email.com" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Phone Number</label>
-                    <input type="tel" id="u-member-phone" placeholder="Mobile Number" class="w-full glass-input text-xs">
+                    <label for="u-member-phone" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Phone Number</label>
+                    <input type="tel" id="u-member-phone" placeholder="Mobile Number" class="w-full glass-input text-xs sm:text-sm">
                 </div>
 
                 <div class="flex justify-end gap-2 pt-2">
