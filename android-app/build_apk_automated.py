@@ -19,7 +19,7 @@ if not JBR_PATH:
 
 SDK_PATH = r"C:\Users\kalai\AppData\Local\Android\Sdk"
 GRADLE_BAT = r"C:\Users\kalai\.gradle\wrapper\dists\gradle-8.14.3-all\10utluxaxniiv4wxiphsi49nj\gradle-8.14.3\bin\gradle.bat"
-APP_DIR = r"C:\Users\kalai\OneDrive\Desktop\NAYAGI INCUBATION BACKEND\android-app"
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Fallback: Check if gradle wrapper bat exists inside project
 PROJECT_GRADLEW = os.path.join(APP_DIR, "gradlew.bat")
@@ -86,7 +86,19 @@ build_cmd = [GRADLE_BAT, "--no-daemon", "assembleDebug", "--stacktrace"]
 print("\n🔨 Compiling Android APK...")
 result = subprocess.run(build_cmd, cwd=APP_DIR, env=env)
 
-if result.returncode == 0 and os.path.exists(apk_path):
+build_gradle_apk = os.path.expanduser(r"~/.gradle_builds/nayagi/app/outputs/apk/debug/NANOVA_INFOTECH.apk")
+target_apk_root = os.path.join(os.path.dirname(APP_DIR), "NANOVA_INFOTECH.apk")
+
+if result.returncode == 0 and os.path.exists(build_gradle_apk):
+    import shutil
+    shutil.copy(build_gradle_apk, target_apk_root)
+    shutil.copy(build_gradle_apk, os.path.join(APP_DIR, "NANOVA_INFOTECH.apk"))
+    print("\n===================================================")
+    print("🎉 SUCCESS! YOUR ANDROID APK IS READY AT:")
+    print("📍 Root Directory:", target_apk_root)
+    print("📍 Android App Directory:", os.path.join(APP_DIR, "NANOVA_INFOTECH.apk"))
+    print("===================================================")
+elif result.returncode == 0 and os.path.exists(apk_path):
     print("\n===================================================")
     print("🎉 SUCCESS! YOUR ANDROID APK IS READY AT:")
     print(apk_path)
