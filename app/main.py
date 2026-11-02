@@ -52,11 +52,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 frontend_dir = os.path.join(BASE_DIR, "frontend")
 static_dir = os.path.join(BASE_DIR, "static")
 
-# Mount frontend/static directories for assets
+# Mount static directories
 if os.path.exists(frontend_dir):
     app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
-elif os.path.exists(static_dir):
-    app.mount("/static", StaticFiles(directory=static_dir), name="static")
+if os.path.exists(static_dir):
+    app.mount("/assets", StaticFiles(directory=static_dir), name="assets")
 
 # Dedicated Guaranteed Logo Endpoints
 @app.get("/logo.svg")
@@ -106,28 +106,52 @@ def serve_splash_video():
     return {"error": "Splash video not found"}
 
 @app.get("/")
+@app.get("/index")
+@app.get("/index.html")
 def serve_home():
-    index_file = os.path.join(frontend_dir, "index.html")
-    if not os.path.exists(index_file):
-        index_file = os.path.join(static_dir, "index.html")
-    if os.path.exists(index_file):
-        return FileResponse(index_file)
+    for f in [os.path.join(frontend_dir, "index.html"), os.path.join(static_dir, "index.html")]:
+        if os.path.exists(f):
+            return FileResponse(f)
     return {"message": "Welcome to Nanova Infotech Backend API. Visit /docs for OpenAPI documentation."}
 
+@app.get("/admin")
 @app.get("/admin.html")
 def serve_admin():
-    file_path = os.path.join(frontend_dir, "admin.html")
-    if not os.path.exists(file_path):
-        file_path = os.path.join(static_dir, "admin.html")
-    if os.path.exists(file_path):
-        return FileResponse(file_path)
+    for f in [os.path.join(frontend_dir, "admin.html"), os.path.join(static_dir, "admin.html")]:
+        if os.path.exists(f):
+            return FileResponse(f)
     return RedirectResponse(url="/")
 
+@app.get("/dashboard")
 @app.get("/dashboard.html")
 def serve_dashboard():
-    file_path = os.path.join(frontend_dir, "dashboard.html")
-    if not os.path.exists(file_path):
-        file_path = os.path.join(static_dir, "dashboard.html")
-    if os.path.exists(file_path):
-        return FileResponse(file_path)
+    for f in [os.path.join(frontend_dir, "dashboard.html"), os.path.join(static_dir, "dashboard.html")]:
+        if os.path.exists(f):
+            return FileResponse(f)
     return RedirectResponse(url="/")
+
+@app.get("/css/{file_name}")
+def serve_css(file_name: str):
+    for folder in [frontend_dir, static_dir]:
+        f = os.path.join(folder, "css", file_name)
+        if os.path.exists(f):
+            return FileResponse(f, media_type="text/css")
+    return {"error": "CSS file not found"}
+
+@app.get("/js/{file_name}")
+def serve_js(file_name: str):
+    for folder in [frontend_dir, static_dir]:
+        f = os.path.join(folder, "js", file_name)
+        if os.path.exists(f):
+            return FileResponse(f, media_type="application/javascript")
+    return {"error": "JS file not found"}
+
+@app.get("/images/{file_name}")
+def serve_images(file_name: str):
+    for folder in [frontend_dir, static_dir]:
+        f = os.path.join(folder, "images", file_name)
+        if os.path.exists(f):
+            ext = os.path.splitext(file_name)[1].lower()
+            media = "image/png" if ext == ".png" else ("image/jpeg" if ext in [".jpg", ".jpeg"] else "image/svg+xml")
+            return FileResponse(f, media_type=media)
+    return {"error": "Image file not found"}
