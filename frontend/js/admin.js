@@ -1,4 +1,4 @@
-// Admin Dashboard JavaScript Controller
+// Admin Dashboard JavaScript Controller for Nanova Infotech
 
 let token = localStorage.getItem("incubation_token");
 let role = localStorage.getItem("incubation_role");
@@ -7,18 +7,18 @@ let currentAdminName = localStorage.getItem("incubation_name");
 
 let allTeams = [];
 let allAttendanceRecords = [];
-let activeChatTeamId = null;
+let activeChatTeamId = "group"; // Default to Company Group Chat
 let chatPollInterval = null;
 
 // Auth Verification
 if (!token || role !== "admin") {
-    alert("Access Denied: Admin authorization required.");
+    alert("Access Denied: Master Admin authorization required.");
     window.location.href = "/";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("admin-user-name").innerText = currentAdminName || "Administrator";
-    document.getElementById("admin-user-email").innerText = currentAdminEmail || "admin@incubation.com";
+    document.getElementById("admin-user-name").innerText = currentAdminName || "Master Admin";
+    document.getElementById("admin-user-email").innerText = currentAdminEmail || "kalaimathavan007@gmail.com";
 
     // Initial Data Fetching
     loadAdminStats();
@@ -44,13 +44,13 @@ function showToast(msg, isError = false) {
     if (!container) return;
 
     const toast = document.createElement("div");
-    toast.className = `px-4 py-3 rounded-xl text-xs font-semibold shadow-xl border flex items-center gap-2 animate-fade-in ${
+    toast.className = `px-4 py-3 rounded-xl text-xs font-bold shadow-xl border flex items-center gap-2 animate-fade-in ${
         isError
-        ? "bg-red-950/90 text-red-200 border-red-500/40"
-        : "bg-emerald-950/90 text-emerald-200 border-emerald-500/40"
+        ? "bg-red-50 text-red-700 border-red-300"
+        : "bg-blue-50 text-blue-800 border-blue-300"
     }`;
     toast.innerHTML = `
-        <i class="fa-solid ${isError ? 'fa-circle-exclamation text-red-400' : 'fa-circle-check text-emerald-400'}"></i>
+        <i class="fa-solid ${isError ? 'fa-circle-exclamation text-red-500' : 'fa-circle-check text-blue-600'}"></i>
         <span>${escapeHtml(msg)}</span>
     `;
 
@@ -76,8 +76,8 @@ function logout() {
 function switchTab(tabName) {
     document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
     document.querySelectorAll(".tab-btn").forEach(btn => {
-        btn.classList.remove("bg-indigo-600", "text-white", "shadow-lg");
-        btn.classList.add("bg-slate-800/80", "text-slate-400");
+        btn.classList.remove("bg-blue-700", "text-white", "shadow-md");
+        btn.classList.add("bg-slate-100", "text-slate-600");
     });
 
     const activeContent = document.getElementById(`tab-content-${tabName}`);
@@ -85,11 +85,13 @@ function switchTab(tabName) {
 
     if (activeContent) activeContent.classList.remove("hidden");
     if (activeBtn) {
-        activeBtn.classList.remove("bg-slate-800/80", "text-slate-400");
-        activeBtn.classList.add("bg-indigo-600", "text-white", "shadow-lg");
+        activeBtn.classList.remove("bg-slate-100", "text-slate-600");
+        activeBtn.classList.add("bg-blue-700", "text-white", "shadow-md");
     }
 
-    if (tabName === "chat" && activeChatTeamId) {
+    if (tabName === "chat") {
+        renderChatTeamsList();
+        fetchChatMessages();
         startChatPolling();
     } else {
         stopChatPolling();
@@ -117,7 +119,7 @@ async function loadAdminStats() {
 // 2. Load Teams List
 async function loadTeamsList() {
     const container = document.getElementById("teams-grid-container");
-    container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading teams...</div>`;
+    if (container) container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-500 text-xs"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading teams...</div>`;
 
     try {
         const res = await fetch("/api/admin/teams", { headers: getAuthHeaders() });
@@ -130,7 +132,7 @@ async function loadTeamsList() {
 
     } catch (err) {
         console.error(err);
-        container.innerHTML = `<div class="col-span-full py-8 text-center text-red-400 text-xs">Error loading teams.</div>`;
+        if (container) container.innerHTML = `<div class="col-span-full py-8 text-center text-red-500 text-xs">Error loading teams.</div>`;
     }
 }
 
@@ -139,62 +141,62 @@ function renderTeamsGrid(teams) {
     if (!container) return;
 
     if (teams.length === 0) {
-        container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-500 text-xs">No teams registered yet. Click "Add Team" above to create one.</div>`;
+        container.innerHTML = `<div class="col-span-full py-12 text-center text-slate-500 text-xs">No department teams created yet. Click "Add Team" above.</div>`;
         return;
     }
 
     container.innerHTML = "";
     teams.forEach(t => {
         const membersList = t.members.map(m => `
-            <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 text-xs">
+            <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-blue-50/60 border border-blue-100 text-xs">
                 <div>
-                    <span class="font-semibold text-slate-200">${escapeHtml(m.name)}</span>
-                    <span class="text-[10px] text-indigo-400 ml-1">(${escapeHtml(m.role_in_team)})</span>
+                    <span class="font-bold text-slate-800">${escapeHtml(m.name)}</span>
+                    <span class="text-[10px] text-blue-600 font-semibold ml-1">(${escapeHtml(m.role_in_team)})</span>
                 </div>
-                <button type="button" onclick="removeTeamMember('${m.id}')" class="text-slate-500 hover:text-red-400 text-xs px-1" title="Remove Member">
+                <button type="button" onclick="removeTeamMember('${m.id}')" class="text-slate-400 hover:text-red-600 text-xs px-1" title="Remove Member">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
         `).join("");
 
         const card = document.createElement("div");
-        card.className = "glass-panel p-4 sm:p-5 flex flex-col justify-between border-t-2 border-t-indigo-500 hover:border-indigo-400 transition-all";
+        card.className = "bg-white p-4 sm:p-5 flex flex-col justify-between border-t-4 border-t-blue-700 rounded-2xl shadow-md border border-slate-200 hover:shadow-lg transition-all";
         card.innerHTML = `
             <div>
                 <div class="flex justify-between items-start mb-2">
-                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">${escapeHtml(t.domain || "General")}</span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">${escapeHtml(t.status)}</span>
+                    <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">${escapeHtml(t.domain || "Engineering")}</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 font-semibold">${escapeHtml(t.status)}</span>
                 </div>
 
                 <div class="flex justify-between items-center">
-                    <h3 class="text-base sm:text-lg font-bold text-white mb-1">${escapeHtml(t.name)}</h3>
-                    <button type="button" onclick="openEditTeamModal('${t.id}')" class="text-xs text-indigo-400 hover:text-indigo-300 p-1" title="Edit Team Details">
+                    <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-1">${escapeHtml(t.name)}</h3>
+                    <button type="button" onclick="openEditTeamModal('${t.id}')" class="text-xs text-blue-700 hover:text-blue-900 p-1" title="Edit Details">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                 </div>
 
-                <p class="text-xs font-semibold text-slate-300 mb-2"><i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i>${escapeHtml(t.idea_title || "N/A")}</p>
-                <p class="text-xs text-slate-400 mb-4 line-clamp-2">${escapeHtml(t.description || "No description provided.")}</p>
+                <p class="text-xs font-semibold text-blue-800 mb-2"><i class="fa-solid fa-briefcase text-blue-600 mr-1"></i>${escapeHtml(t.idea_title || "N/A")}</p>
+                <p class="text-xs text-slate-600 mb-4 line-clamp-2">${escapeHtml(t.description || "No description provided.")}</p>
 
                 <!-- Members Section -->
-                <div class="mt-4 pt-3 border-t border-slate-800">
+                <div class="mt-4 pt-3 border-t border-slate-100">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-bold text-slate-300">Team Members (${t.members_count})</span>
-                        <button type="button" onclick="openAddMemberModal('${t.id}')" class="text-[11px] text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1">
+                        <span class="text-xs font-bold text-slate-800">Team Roster (${t.members_count})</span>
+                        <button type="button" onclick="openAddMemberModal('${t.id}')" class="text-[11px] text-blue-700 hover:text-blue-900 font-bold flex items-center gap-1">
                             <i class="fa-solid fa-user-plus"></i> Add
                         </button>
                     </div>
                     <div class="space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                        ${membersList || '<p class="text-[11px] text-slate-500 italic">No members added yet.</p>'}
+                        ${membersList || '<p class="text-[11px] text-slate-400 italic">No members added yet.</p>'}
                     </div>
                 </div>
             </div>
 
-            <div class="mt-5 pt-3 border-t border-slate-800 flex justify-between items-center text-xs">
-                <button type="button" onclick="openChatWithTeam('${t.id}')" class="px-3 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 transition-all flex items-center gap-1.5 font-semibold">
-                    <i class="fa-solid fa-comments"></i> Direct Message
+            <div class="mt-5 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
+                <button type="button" onclick="openChatWithTeam('${t.id}')" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white border border-blue-200 transition-all flex items-center gap-1.5 font-bold">
+                    <i class="fa-solid fa-comments"></i> Private Chat
                 </button>
-                <button type="button" onclick="deleteTeam('${t.id}')" class="p-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors" title="Delete Team">
+                <button type="button" onclick="deleteTeam('${t.id}')" class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete Team">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
             </div>
@@ -217,9 +219,10 @@ function filterTeamsList() {
     renderTeamsGrid(filtered);
 }
 
-// 3. Load Attendance Records
+// 3. Attendance Records
 async function loadAttendanceRecords() {
     const tbody = document.getElementById("attendance-table-body");
+    if (!tbody) return;
     tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-slate-500"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading records...</td></tr>`;
 
     const filterDate = document.getElementById("attendance-filter-date").value;
@@ -241,31 +244,26 @@ async function loadAttendanceRecords() {
 
         tbody.innerHTML = "";
         allAttendanceRecords.forEach(r => {
-            let statusBadgeClass = "badge-status-present";
-            if (r.status === "Absent") statusBadgeClass = "badge-status-absent";
-            if (r.status === "Half Day") statusBadgeClass = "badge-status-halfday";
-            if (r.status === "Working Remotely") statusBadgeClass = "badge-status-remote";
-
             const row = document.createElement("tr");
-            row.className = "hover:bg-slate-900/50 transition-colors";
+            row.className = "hover:bg-blue-50/50 transition-colors border-b border-slate-100";
             row.innerHTML = `
-                <td class="py-3 px-3 font-semibold text-white">${escapeHtml(r.date)}</td>
-                <td class="py-3 px-3 font-bold text-indigo-300">${escapeHtml(r.team_name || "N/A")}</td>
-                <td class="py-3 px-3 text-slate-300">${escapeHtml(r.submitted_by_name || "Team Member")}</td>
+                <td class="py-3 px-3 font-bold text-slate-900">${escapeHtml(r.date)}</td>
+                <td class="py-3 px-3 font-bold text-blue-700">${escapeHtml(r.team_name || "N/A")}</td>
+                <td class="py-3 px-3 font-medium text-slate-700">${escapeHtml(r.submitted_by_name || "Employee")}</td>
                 <td class="py-3 px-3">
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${statusBadgeClass}">
+                    <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-100 text-blue-800 border border-blue-200">
                         ${escapeHtml(r.status)}
                     </span>
                 </td>
-                <td class="py-3 px-3 text-slate-300 max-w-xs truncate">${escapeHtml(r.work_summary || "-")}</td>
-                <td class="py-3 px-3 text-slate-500 text-[11px]">${new Date(r.submitted_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+                <td class="py-3 px-3 text-slate-600 max-w-xs truncate">${escapeHtml(r.work_summary || "-")}</td>
+                <td class="py-3 px-3 text-slate-400 text-[11px]">${new Date(r.submitted_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
             `;
             tbody.appendChild(row);
         });
 
     } catch (err) {
         console.error(err);
-        tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-red-400">Error fetching attendance.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-red-500">Error fetching attendance.</td></tr>`;
     }
 }
 
@@ -297,7 +295,7 @@ function exportAttendanceCSV() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `incubation_attendance_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `nanova_attendance_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -313,12 +311,12 @@ async function exportDatabaseBackup() {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
         const dlAnchor = document.createElement('a');
         dlAnchor.setAttribute("href", dataStr);
-        dlAnchor.setAttribute("download", `nayagi_incubation_db_backup_${new Date().toISOString().split('T')[0]}.json`);
+        dlAnchor.setAttribute("download", `nanova_db_backup_${new Date().toISOString().split('T')[0]}.json`);
         document.body.appendChild(dlAnchor);
         dlAnchor.click();
         dlAnchor.remove();
 
-        showToast("Database Backup exported & downloaded successfully!");
+        showToast("Database Backup exported successfully!");
     } catch (err) {
         showToast(err.message, true);
     }
@@ -326,6 +324,7 @@ async function exportDatabaseBackup() {
 
 function updateTeamSelectOptions() {
     const select = document.getElementById("attendance-filter-team");
+    if (!select) return;
     select.innerHTML = `<option value="">All Teams</option>`;
     allTeams.forEach(t => {
         select.innerHTML += `<option value="${t.id}">${escapeHtml(t.name)}</option>`;
@@ -383,26 +382,8 @@ function openEditTeamModal(teamId) {
     document.getElementById("edit-team-id").value = team.id;
     document.getElementById("edit-team-name").value = team.name;
     document.getElementById("edit-team-idea").value = team.idea_title || "";
-
-    const domainSelect = document.getElementById("edit-team-domain");
-    const otherInput = document.getElementById("edit-team-domain-other");
-    const otherContainer = document.getElementById("edit-team-domain-other-container");
-
-    const predefined = ["AI & Robotics", "IoT", "AgriTech", "HealthTech", "EdTech", "FinTech", "CleanTech & Energy", "General Software"];
-    if (predefined.includes(team.domain)) {
-        domainSelect.value = team.domain;
-        otherContainer.classList.add("hidden");
-        otherInput.value = "";
-    } else if (team.domain) {
-        domainSelect.value = "Other";
-        otherContainer.classList.remove("hidden");
-        otherInput.value = team.domain;
-    } else {
-        domainSelect.value = "General Software";
-        otherContainer.classList.add("hidden");
-    }
-
-    document.getElementById("edit-team-status").value = team.status || "Incubated";
+    document.getElementById("edit-team-domain").value = team.domain || "Engineering";
+    document.getElementById("edit-team-status").value = team.status || "Active";
     document.getElementById("edit-team-desc").value = team.description || "";
 
     document.getElementById("modal-edit-team").classList.remove("hidden");
@@ -421,13 +402,7 @@ async function handleCreateTeamSubmit(e) {
     e.preventDefault();
     const name = document.getElementById("modal-team-name").value.trim();
     const idea_title = document.getElementById("modal-team-idea").value.trim();
-
-    let domain = document.getElementById("modal-team-domain").value;
-    if (domain === "Other") {
-        const customDomain = document.getElementById("modal-team-domain-other").value.trim();
-        domain = customDomain || "Custom Domain";
-    }
-
+    const domain = document.getElementById("modal-team-domain").value.trim();
     const description = document.getElementById("modal-team-desc").value.trim();
 
     try {
@@ -454,13 +429,7 @@ async function handleEditTeamSubmit(e) {
     const teamId = document.getElementById("edit-team-id").value;
     const name = document.getElementById("edit-team-name").value.trim();
     const idea_title = document.getElementById("edit-team-idea").value.trim();
-
-    let domain = document.getElementById("edit-team-domain").value;
-    if (domain === "Other") {
-        const customDomain = document.getElementById("edit-team-domain-other").value.trim();
-        domain = customDomain || "Custom Domain";
-    }
-
+    const domain = document.getElementById("edit-team-domain").value.trim();
     const status = document.getElementById("edit-team-status").value;
     const description = document.getElementById("edit-team-desc").value.trim();
 
@@ -541,29 +510,65 @@ async function removeTeamMember(memberId) {
     }
 }
 
-// 5. Direct Messaging (Chat) & Mobile View Switcher
+// 5. Messaging Channels (Group Chat + 1-on-1 Employee Direct Messaging)
 function renderChatTeamsList() {
     const list = document.getElementById("chat-teams-list");
     if (!list) return;
 
+    list.innerHTML = "";
+
+    // 1. Company Group Chat Option (Always Top)
+    const isGroupActive = (activeChatTeamId === "group");
+    const groupBtn = document.createElement("button");
+    groupBtn.type = "button";
+    groupBtn.className = `w-full text-left p-3.5 rounded-xl border flex items-center justify-between transition-all mb-2 ${
+        isGroupActive
+        ? "bg-blue-700 text-white border-blue-800 shadow-md"
+        : "bg-blue-50/80 text-blue-900 border-blue-200 hover:bg-blue-100"
+    }`;
+    groupBtn.onclick = () => selectTeamChat("group", "🏢 Company Group Chat", "Broadcast & Team Discussion");
+    groupBtn.innerHTML = `
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center text-xs shadow-sm">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <div>
+                <div class="font-bold text-xs">Company Group Chat</div>
+                <div class="text-[10px] opacity-80">All Employees & Admin</div>
+            </div>
+        </div>
+        <i class="fa-solid fa-chevron-right text-xs opacity-60"></i>
+    `;
+    list.appendChild(groupBtn);
+
+    // Divider
+    const divider = document.createElement("div");
+    divider.className = "text-[10px] font-extrabold uppercase text-slate-400 tracking-wider my-2.5 px-1";
+    divider.innerText = "Employee Conversations";
+    list.appendChild(divider);
+
     if (allTeams.length === 0) {
-        list.innerHTML = `<div class="p-4 text-center text-slate-500 text-xs">No teams available.</div>`;
+        const emptyDiv = document.createElement("div");
+        emptyDiv.className = "p-3 text-center text-slate-400 text-xs italic";
+        emptyDiv.innerText = "No employee conversations yet.";
+        list.appendChild(emptyDiv);
         return;
     }
 
-    list.innerHTML = "";
+    // 2. Individual Employee/Team Conversations
     allTeams.forEach(t => {
-        const activeClass = (String(t.id) === String(activeChatTeamId)) ? "bg-indigo-600/30 border-indigo-500 text-white shadow-md" : "bg-slate-900/60 border-slate-800 text-slate-300 hover:bg-slate-800";
+        const isActive = (String(t.id) === String(activeChatTeamId));
+        const activeClass = isActive ? "bg-blue-700 text-white border-blue-800 shadow-md" : "bg-white text-slate-800 border-slate-200 hover:bg-blue-50";
         const item = document.createElement("button");
         item.type = "button";
-        item.className = `w-full text-left p-3 rounded-xl border flex items-center justify-between transition-all ${activeClass}`;
+        item.className = `w-full text-left p-3 rounded-xl border flex items-center justify-between transition-all mb-1.5 ${activeClass}`;
         item.onclick = () => selectTeamChat(t.id, t.name, t.domain);
         item.innerHTML = `
             <div>
                 <div class="font-bold text-xs">${escapeHtml(t.name)}</div>
-                <div class="text-[10px] text-slate-400">${escapeHtml(t.domain || "Startup")}</div>
+                <div class="text-[10px] opacity-75">${escapeHtml(t.domain || "Team")}</div>
             </div>
-            <i class="fa-solid fa-chevron-right text-xs text-slate-500"></i>
+            <i class="fa-solid fa-chevron-right text-xs opacity-50"></i>
         `;
         list.appendChild(item);
     });
@@ -580,7 +585,7 @@ function openChatWithTeam(teamId) {
 function selectTeamChat(teamId, teamName, teamDomain) {
     activeChatTeamId = teamId;
     document.getElementById("chat-selected-team-name").innerText = teamName;
-    document.getElementById("chat-selected-team-domain").innerText = `Direct Chat (${teamDomain || "Startup"})`;
+    document.getElementById("chat-selected-team-domain").innerText = (teamId === "group") ? "Company-Wide Realtime Discussion" : `Direct 1-on-1 Chat (${teamDomain || "Employee"})`;
     document.getElementById("chat-input-text").disabled = false;
 
     // Mobile View Toggle: Show Chat Box, Hide Sidebar
@@ -607,28 +612,32 @@ async function fetchChatMessages() {
     if (!activeChatTeamId) return;
     const container = document.getElementById("chat-messages-container");
 
+    const endpoint = (activeChatTeamId === "group") ? "/api/messages/group" : `/api/messages/team/${activeChatTeamId}`;
+
     try {
-        const res = await fetch(`/api/messages/team/${activeChatTeamId}`, { headers: getAuthHeaders() });
+        const res = await fetch(endpoint, { headers: getAuthHeaders() });
         if (!res.ok) return;
         const messages = await res.json();
 
         if (messages.length === 0) {
-            container.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-slate-500 text-xs">No messages yet. Send a message to start conversation!</div>`;
+            container.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-slate-400 text-xs">No messages in this conversation yet. Send a message to start!</div>`;
             return;
         }
 
         container.innerHTML = "";
         messages.forEach(m => {
             const isMe = (m.sender_role === "admin");
-            const bubbleBg = isMe ? "bg-indigo-600 text-white rounded-br-none ml-auto shadow-indigo-600/20" : "bg-slate-800 text-slate-200 rounded-bl-none mr-auto border border-slate-700";
-            const senderTag = isMe ? "Admin" : escapeHtml(m.sender_name);
+            const bubbleBg = isMe
+                ? "bg-blue-700 text-white rounded-br-none ml-auto shadow-md"
+                : "bg-slate-100 text-slate-800 rounded-bl-none mr-auto border border-slate-200 shadow-sm";
+            const senderTag = isMe ? "Master Admin (Kalai)" : escapeHtml(m.sender_name);
 
             const msgDiv = document.createElement("div");
-            msgDiv.className = `max-w-[85%] sm:max-w-[80%] p-2.5 sm:p-3 rounded-2xl text-xs ${bubbleBg} shadow-md`;
+            msgDiv.className = `max-w-[85%] sm:max-w-[80%] p-3 rounded-2xl text-xs ${bubbleBg}`;
             msgDiv.innerHTML = `
-                <div class="font-bold text-[10px] opacity-80 mb-0.5">${senderTag}</div>
-                <div class="leading-relaxed text-xs">${escapeHtml(m.content)}</div>
-                <div class="text-[9px] opacity-60 text-right mt-1">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                <div class="font-extrabold text-[10px] ${isMe ? 'text-blue-100' : 'text-blue-800'} mb-0.5">${senderTag}</div>
+                <div class="leading-relaxed font-medium text-xs">${escapeHtml(m.content)}</div>
+                <div class="text-[9px] opacity-70 text-right mt-1">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
             `;
             container.appendChild(msgDiv);
         });
@@ -648,8 +657,10 @@ async function sendAdminChatMessage(e) {
     const content = input.value.trim();
     if (!content) return;
 
+    const endpoint = (activeChatTeamId === "group") ? "/api/messages/group" : `/api/messages/team/${activeChatTeamId}`;
+
     try {
-        const res = await fetch(`/api/messages/team/${activeChatTeamId}`, {
+        const res = await fetch(endpoint, {
             method: "POST",
             headers: getAuthHeaders(),
             body: JSON.stringify({ content })
@@ -665,7 +676,7 @@ async function sendAdminChatMessage(e) {
 
 function startChatPolling() {
     stopChatPolling();
-    chatPollInterval = setInterval(fetchChatMessages, 4000);
+    chatPollInterval = setInterval(fetchChatMessages, 3500);
 }
 
 function stopChatPolling() {
