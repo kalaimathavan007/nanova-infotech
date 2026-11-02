@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
 
     // Nanova Infotech Vercel Production URL
-    private val PORTAL_URL = "https://nanova-infotech.vercel.app/"
+    private val PORTAL_URL = "https://nanova-infotech-injddt0e8-ranger-one007s-projects.vercel.app/"
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
