@@ -10,14 +10,14 @@
 
     <style>
         :root {
-            --bg-dark: #030712;
-            --card-bg: rgba(10, 25, 47, 0.92);
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --secondary: #38bdf8;
-            --text-main: #ffffff;
-            --text-muted: #93c5fd;
-            --border-glass: rgba(37, 99, 235, 0.3);
+            --bg-main: #edf2f7;
+            --card-bg: #ffffff;
+            --primary: #1d4ed8;
+            --primary-hover: #1e40af;
+            --secondary: #2563eb;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-blue: rgba(29, 78, 216, 0.22);
         }
 
         * {
@@ -29,8 +29,8 @@
 
         body {
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.3), transparent 75%), url('/logo.svg');
+            background-color: var(--bg-main);
+            background-image: radial-gradient(circle at 50% 50%, rgba(29, 78, 216, 0.12), transparent 80%), url('/logo.svg');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover, 420px;
@@ -49,10 +49,10 @@
         .ambient-glow {
             position: fixed;
             border-radius: 50%;
-            filter: blur(130px);
+            filter: blur(140px);
             pointer-events: none;
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.35;
         }
         .glow-1 {
             top: -15%;
@@ -66,18 +66,16 @@
             right: -15%;
             width: 550px;
             height: 550px;
-            background: radial-gradient(circle, #38bdf8, transparent 70%);
+            background: radial-gradient(circle, #60a5fa, transparent 70%);
         }
 
-        /* Professional Glass Card */
+        /* Professional White & Royal Blue Card */
         .pro-card {
             background: var(--card-bg);
-            backdrop-filter: blur(32px);
-            -webkit-backdrop-filter: blur(32px);
-            border: 1px solid var(--border-glass);
+            border: 2px solid var(--border-blue);
             border-radius: 22px;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.95),
-                        0 0 40px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(29, 78, 216, 0.25),
+                        0 0 30px rgba(29, 78, 216, 0.1);
             width: 100%;
             max-width: 440px;
             padding: 2.25rem 2rem;
@@ -101,14 +99,14 @@
             height: auto;
             max-height: 170px;
             object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.4));
+            filter: drop-shadow(0 0 16px rgba(29, 78, 216, 0.3));
         }
 
         .brand-subtitle {
             text-align: center;
-            font-size: 0.8rem;
-            color: #93c5fd;
-            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1e40af;
+            font-weight: 700;
             margin-bottom: 1.25rem;
             letter-spacing: 0.5px;
         }
@@ -116,10 +114,10 @@
         /* Auth Tabs */
         .tab-bar {
             display: flex;
-            background: rgba(15, 23, 42, 0.85);
-            padding: 0.25rem;
+            background: #f1f5f9;
+            padding: 0.3rem;
             border-radius: 12px;
-            border: 1px solid rgba(37, 99, 235, 0.25);
+            border: 1px solid rgba(29, 78, 216, 0.2);
             margin-bottom: 1.5rem;
         }
 
@@ -130,7 +128,7 @@
             font-weight: 700;
             border-radius: 9px;
             border: none;
-            color: #94a3b8;
+            color: #475569;
             background: transparent;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -141,9 +139,9 @@
         }
 
         .tab-btn.active {
-            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
             color: #ffffff;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.5);
+            box-shadow: 0 4px 14px rgba(29, 78, 216, 0.4);
         }
 
         /* Inputs */
@@ -156,10 +154,10 @@
 
         .form-label {
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.6px;
-            color: #e2e8f0;
+            color: #1e3a8a;
         }
 
         .input-wrapper {
@@ -171,46 +169,47 @@
         .input-wrapper i {
             position: absolute;
             left: 0.9rem;
-            color: #60a5fa;
+            color: #1d4ed8;
             font-size: 0.85rem;
         }
 
         .form-input {
-            background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(37, 99, 235, 0.35);
-            color: #ffffff;
+            background: #f8fafc;
+            border: 1.5px solid rgba(29, 78, 216, 0.35);
+            color: #0f172a;
             border-radius: 10px;
             padding: 0.75rem 0.9rem 0.75rem 2.5rem;
             font-size: 0.875rem;
+            font-weight: 600;
             width: 100%;
             outline: none;
             transition: all 0.2s ease;
         }
 
         .form-input:focus {
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
-            background: rgba(15, 23, 42, 0.98);
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 3.5px rgba(29, 78, 216, 0.2);
+            background: #ffffff;
         }
 
         select.form-input option {
-            background-color: #0f172a;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #0f172a;
         }
 
         /* Action Buttons */
         .btn-submit {
             width: 100%;
             padding: 0.85rem;
-            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            background: linear-gradient(135deg, #1e40af, #1d4ed8);
             color: #ffffff;
             font-size: 0.875rem;
-            font-weight: 700;
+            font-weight: 800;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45);
+            box-shadow: 0 4px 18px rgba(29, 78, 216, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -220,7 +219,8 @@
 
         .btn-submit:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 22px rgba(37, 99, 235, 0.65);
+            box-shadow: 0 6px 22px rgba(29, 78, 216, 0.6);
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
         }
 
         /* Alert Notification */
@@ -228,20 +228,21 @@
             padding: 0.75rem;
             border-radius: 10px;
             font-size: 0.8rem;
+            font-weight: 600;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         .alert-box.error {
-            background: rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.4);
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
         }
         .alert-box.success {
-            background: rgba(16, 185, 129, 0.2);
-            color: #6ee7b7;
-            border: 1px solid rgba(16, 185, 129, 0.4);
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #86efac;
         }
 
         .hidden { display: none !important; }
@@ -260,7 +261,7 @@
         </video>
     </div>
 
-    <!-- MAIN PROFESSIONAL CARD -->
+    <!-- MAIN WHITE & ROYAL BLUE CARD -->
     <div class="pro-card">
 
         <!-- Logo -->
