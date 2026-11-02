@@ -20,7 +20,7 @@ def get_admin_settings(db: Session = Depends(get_db), admin: models.User = Depen
     setting = mongo_dal.get_admin_settings_mongo()
     return {
         "id": 1,
-        "incubation_name": setting.get("incubation_name", "Nayagi Incubation Center"),
+        "incubation_name": setting.get("incubation_name", "Nanova Infotech"),
         "allowed_admin_emails": setting.get("allowed_admin_emails", ""),
         "announcement": setting.get("announcement", ""),
         "updated_at": setting.get("updated_at") or "2025-02-23T00:00:00"
@@ -43,7 +43,7 @@ def update_admin_settings(
     setting = mongo_dal.update_admin_settings_mongo(update_fields)
     return {
         "id": 1,
-        "incubation_name": setting.get("incubation_name", "Nayagi Incubation Center"),
+        "incubation_name": setting.get("incubation_name", "Nanova Infotech"),
         "allowed_admin_emails": setting.get("allowed_admin_emails", ""),
         "announcement": setting.get("announcement", ""),
         "updated_at": setting.get("updated_at") or "2025-02-23T00:00:00"

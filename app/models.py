@@ -78,7 +78,7 @@ class AdminSetting(Base):
     __tablename__ = "admin_settings"
 
     id = Column(Integer, primary_key=True, index=True)
-    incubation_name = Column(String, default="Nayagi Incubation Center")
-    allowed_admin_emails = Column(Text, default="admin@incubation.com, admin2@incubation.com, kalai@nayagi.com, director@incubation.com")
-    announcement = Column(Text, default="Welcome to the Nayagi Incubation Portal! Please submit your daily attendance regularly.")
+    incubation_name = Column(String, default="Nanova Infotech")
+    allowed_admin_emails = Column(Text, default="kalaimathavan007@gmail.com, admin@nanovainfotech.com")
+    announcement = Column(Text, default="Welcome to the Nanova Infotech Portal! Please submit your daily attendance regularly.")
     updated_at = Column(DateTime, default=datetime.utcnow)

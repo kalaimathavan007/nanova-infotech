@@ -32,7 +32,7 @@ def init_mongo_db():
             if not admin_user:
                 db_sql.add(models.User(
                     email=admin_email,
-                    hashed_password=get_password_hash("nayagi1234"),
+                    hashed_password=get_password_hash("nanova1234"),
                     full_name="Rajalingam Rajesh",
                     role="admin"
                 ))
@@ -479,9 +479,9 @@ def get_admin_settings_mongo() -> Dict[str, Any]:
                 }
             return {
                 "id": "1",
-                "incubation_name": "Nayagi Incubation Center",
-                "allowed_admin_emails": "rajalingamrajesh70@gmail.com, admin@incubation.com, kalai@nayagi.com, director@incubation.com",
-                "announcement": "Welcome to Nayagi Incubation Portal."
+                "incubation_name": "Nanova Infotech",
+                "allowed_admin_emails": "kalaimathavan007@gmail.com, admin@nanovainfotech.com",
+                "announcement": "Welcome to Nanova Infotech Portal."
             }
         finally:
             db_sql.close()
@@ -489,9 +489,9 @@ def get_admin_settings_mongo() -> Dict[str, Any]:
     setting = db.admin_settings.find_one()
     if not setting:
         res = db.admin_settings.insert_one({
-            "incubation_name": "Nayagi Incubation Center",
-            "allowed_admin_emails": "rajalingamrajesh70@gmail.com, admin@incubation.com, kalai@nayagi.com, director@incubation.com",
-            "announcement": "Welcome to the Nayagi Incubation Portal! Teams please submit your daily attendance on time.",
+            "incubation_name": "Nanova Infotech",
+            "allowed_admin_emails": "kalaimathavan007@gmail.com, admin@nanovainfotech.com",
+            "announcement": "Welcome to the Nanova Infotech Portal! Teams please submit your daily attendance on time.",
             "updated_at": datetime.utcnow()
         })
         setting = db.admin_settings.find_one({"_id": res.inserted_id})
@@ -537,7 +537,7 @@ def get_stats_mongo() -> Dict[str, Any]:
                 "total_users": tu,
                 "total_members": tm,
                 "today_attendance_count": ta,
-                "announcement": s.get("announcement", "Welcome to Nayagi Incubation Portal.")
+                "announcement": s.get("announcement", "Welcome to Nanova Infotech Portal.")
             }
         finally:
             db_sql.close()
@@ -554,5 +554,5 @@ def get_stats_mongo() -> Dict[str, Any]:
         "total_users": total_users,
         "total_members": total_members,
         "today_attendance_count": today_attendance_count,
-        "announcement": setting.get("announcement", "Welcome to Nayagi Incubation Portal.")
+        "announcement": setting.get("announcement", "Welcome to Nanova Infotech Portal.")
     }

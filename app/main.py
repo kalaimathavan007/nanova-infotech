@@ -112,7 +112,7 @@ def serve_home():
         index_file = os.path.join(static_dir, "index.html")
     if os.path.exists(index_file):
         return FileResponse(index_file)
-    return {"message": "Welcome to Nayagi Incubation Center Backend API. Visit /docs for OpenAPI documentation."}
+    return {"message": "Welcome to Nanova Infotech Backend API. Visit /docs for OpenAPI documentation."}
 
 @app.get("/admin.html")
 def serve_admin():
